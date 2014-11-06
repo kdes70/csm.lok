@@ -1,0 +1,135 @@
+/* = Сброс отступов для всех элементов */
+* { margin: 0; padding: 0 }
+
+/* = Убираем маркировку списков */
+ul, ol { list-style: none }
+
+/* = Работаем с таблицами: убираем удвоение рамок ячеек и расстояние между ячейками */
+table { border-collapse: collapse; border-spacing: 0 }
+
+/* = Ссылки */
+a { text-decoration: none;}
+
+p{line-height: 1.5;}
+
+/* = Убираем рамку для изображений */
+img { border: none; max-width: 100%; height: auto; }
+
+article, aside, figure, footer, header, hgroup, nav, section {display: block;}
+
+hr{
+	margin: 10px auto;
+}
+label{vertical-align: middle;}
+
+*{
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+
+/* ПАЛИТРА ОСНОВНЫХ ЦВЕТОВ ДЛЯ АДМИНКИ 
+
+background-color: rgba(255,255,255,.2);  Прозрачный цвет фон
+
+color: #3AE2CE;             цвет сине-зеленый для ссылок
+
+background-color: #3E4156; темный цвет
+
+*/
+
+html{
+	font-family:Tahoma, Verdana, Helvetica, Geneva, sans-serif !important;
+	-webkit-font-smoothing:antialiased; 
+	text-rendering: optimizeSpeed;
+}
+
+
+body{
+	height: 100%;
+	color: #3E4156;
+	font-weight: 600;
+	text-align: center;
+	line-height: normal;
+}
+
+/* = Убираем обводку при клике на элементы форм и др. */
+:focus { outline: 0 }
+
+/* = Сбрасываем выравнивание после плавающих элементов */
+.clear { clear: both; height: 1px; margin-top: -1px }
+
+i.fa { margin-right: 5px; }
+
+.hidden {
+display: none;
+}
+/*-----SECTION BLOCKS------*/
+
+#wrepper{
+	width: 1024px;
+	height: 1000px;
+	margin: 0 auto;
+	outline: 1px solid red;
+}
+/*----HEADER----*/
+header#header{
+	width: 100%;
+	height: 80px;
+	outline: 1px solid blue;
+}
+#logo_block{
+	width: 50%;
+	height: 60px;
+	float: left;
+}
+#auth_block{
+ 	height: 65px; 
+ 	width: 50%;
+ 	float: right;
+}
+#auth_block p{ float: right; margin: 20px;
+
+}
+/*----MENU----*/
+nav#top_menu{
+	width: 100%;
+	outline: 1px solid black;
+	height: 40px;
+}
+#top_menu ul li{
+	text-align: center;
+	border-right: 1px solid;
+	line-height: 40px;
+	width: 20%;
+	float: left;
+}
+	#top_menu ul li:last-child{
+		border-right: 0;
+	}
+#top_menu ul li a{
+	height: 40px;
+	display: block;
+}
+
+/*----REGISTRATION----*/
+.form_field{
+	position: relative;
+	width: 51%;
+	height: 50px;
+	margin: 0 auto;
+}
+div.form_field p{
+	float: left;
+}
+footer#footer{
+	width: 100%;
+	height: 40px;
+	position: relative;
+	outline: 1px solid black;
+}
+/*======USERS=====*/
+.table_block table {
+margin: 20px auto;
+}

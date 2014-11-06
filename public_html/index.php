@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('Europe/Moscow');
+
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -18,7 +20,16 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	define('ENVIRONMENT', 'development');
+	switch (dirname(__FILE__)) {
+		case 'D:\OpenServer\domains\csm.lok\public_html':
+			define('ENVIRONMENT', 'development');
+			break;
+		
+		default:
+			define('ENVIRONMENT', 'production');
+			break;
+	}
+			
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -33,7 +44,7 @@ if (defined('ENVIRONMENT'))
 	switch (ENVIRONMENT)
 	{
 		case 'development':
-			error_reporting(E_ALL);
+			error_reporting(E_ALL | E_STRICT);
 		break;
 	
 		case 'testing':
