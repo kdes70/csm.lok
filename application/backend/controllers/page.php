@@ -74,6 +74,14 @@ class Page extends Frontend_Controller{
 
 				$this->display_lib->user_login($view, $data);
 				break;
+			// case 'profiles':
+
+
+
+
+			// 	$view = 'user/profiles';
+			// 	$this->display_lib->user_login($view, $data);
+			// 	break;
 			default:
 				// Значения по умолчанию
 				break;

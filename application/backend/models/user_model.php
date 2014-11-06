@@ -79,9 +79,6 @@ class User_Model extends MY_Model
 	function __construct()
 	{
 		parent::__construct();
-
-
-
 	}
 
 	public function login()
@@ -91,17 +88,17 @@ class User_Model extends MY_Model
 			'password' => $this->hash($this->input->post('password')), 
 			), TRUE);
 
-		  if($user->id_groups > 0)
-			{	
-				$this->load->model('group_model');
-				//$group = $this->group_model->get_by(array('id_group'=> $user->id_groups), TRUE);
-				// Проверяем относится ли пользователь к группе админов
-				if($this->is_admin($user->id_groups) == TRUE)
-				{
-					 $this->session->set_userdata(array('is_admin' =>TRUE));
-				}
-				
-			}  
+	    if($user->id_groups > 0)
+		{	
+			$this->load->model('group_model');
+			//$group = $this->group_model->get_by(array('id_group'=> $user->id_groups), TRUE);
+			// Проверяем относится ли пользователь к группе админов
+			if($this->is_admin($user->id_groups) == TRUE)
+			{
+				 $this->session->set_userdata(array('is_admin' =>TRUE));
+			}
+			
+		}  
 
 		if(count($user))
 		{   //Log in user
@@ -114,11 +111,8 @@ class User_Model extends MY_Model
 		      
 		    );
 
-
 		    $this->session->set_userdata($data);
-		  
-
-		  
+		  	  
 		}
 	}
 
@@ -154,7 +148,11 @@ class User_Model extends MY_Model
 
 // delete user
 
-// is admin user
+/**
+ * is admin user
+ * @param  [type]  $id_groups [description]
+ * @return boolean            [description]
+ */
     public function is_admin($id_groups)
     {
     	//var_dump($this->_is_admin);
@@ -164,6 +162,29 @@ class User_Model extends MY_Model
     	 
     
     }
+
+    public function get_profiles($id_user)
+    {   
+        
+
+        $data = $this->get($id_user);
+        if($data->profession)
+        {
+             $data->profession = $this->get_profession($data->profession);
+        }
+        // TODO продумать исключение  
+        $data->profession = (object)array('name'=>'Нет профессии');
+        return $data;
+    }
+
+    public function get_profession($id_prof)
+    {   
+        $this->load->model('profession_model');
+       return $this->profession_model->get($id_prof);
+       
+    }
+
+
 // is role user
 
 // is prova of user

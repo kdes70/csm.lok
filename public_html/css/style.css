@@ -129,3 +129,13 @@ footer#footer{
 	position: relative;
 	outline: 1px solid black;
 }
+
+/*===PROFILE===*/
+.Profile_block {
+padding: 10px;
+}
+/*====MAIN====*/
+div#main {
+padding: 20px;
+min-height: 300px;
+}
