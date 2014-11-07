@@ -27,7 +27,7 @@
                 ?>
                     
                 <?php endforeach; ?>
-                <?php echo form_dropdown('groups', $option, '0', 'id="groups"'); ?>
+                <?php echo form_dropdown('groups', $option, set_value('groups'), 'id="groups"'); ?>
                <!--  <select id="user_status"  name="user_status">
                   <option value="0">Выберите свой статус</option>
                   <option value="1">Сотрудник СЦМ</option>
@@ -47,24 +47,24 @@
               <?php foreach ($profession as $name):
                 $option[$name->id] = $name->name;
               endforeach;?>
-              <?php echo form_dropdown('profession', $option, '','disabled="disabled" id="profession" class="testclass"'); ?>
+              <?php echo form_dropdown('profession', $option, set_value('profession'),'disabled="disabled" id="profession" class="testclass"'); ?>
             </p> 
           <?php endif; ?>
           <!-- AJAX query $data=user.profession -->
           <div class="form_field">
             <p>
                 <label for="name">Имя <br>
-                <?php echo form_input('name', '', 'id="name" maxlength="30"'); ?>
+                <?php echo form_input('name', set_value('name'), 'id="name" maxlength="30"'); ?>
                 </label>
               </p>
               <p>
                 <label for="surname"> Фамилия<br>
-                <?php echo form_input('surname', '', 'id="surname" maxlength="30"'); ?>
+                <?php echo form_input('surname', set_value('surname'), 'id="surname" maxlength="30"'); ?>
                 </label>
               </p>
               <p>
                 <label for="patronymic">Очество <br>
-                <?php echo form_input('patronymic', '', 'id="patronymic" maxlength="30"'); ?>
+                <?php echo form_input('patronymic', set_value('patronymic'), 'id="patronymic" maxlength="30"'); ?>
                 </label>
               </p>
           </div>
@@ -102,7 +102,7 @@
            		<p>
            			<?php echo form_submit('submit', 'Отправить', 'id="button"'); ?>
            		</p>
-           <?php echo form_close(); ?>
+          
        
            
 

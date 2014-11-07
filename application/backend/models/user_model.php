@@ -88,9 +88,11 @@ class User_Model extends MY_Model
 			'password' => $this->hash($this->input->post('password')), 
 			), TRUE);
 
+        $this->load->model('group_model');
+
 	    if($user->id_groups)
 		{	
-			$this->load->model('group_model');
+			
 			//$group = $this->group_model->get_by(array('id_group'=> $user->id_groups), TRUE);
 			// Проверяем относится ли пользователь к группе админов
 			if($this->is_admin($user->id_groups) == TRUE)
@@ -112,8 +114,10 @@ class User_Model extends MY_Model
 		    );
 
 		    $this->session->set_userdata($data);
-		  	  
+		  	  return TRUE;
 		}
+
+        return FALSE;
 	}
 
     public function registration()

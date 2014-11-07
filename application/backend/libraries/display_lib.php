@@ -6,22 +6,22 @@
 class Display_lib
 {	
 
-	private $_tpl = 'default';
+	private $_tpl = 'default'; //папка с видами по умолчанию
+
 	
-	public function main_page($view, $data)
+	public function view_page($view, $data)
 	{
 		$CI =& get_instance();
 
 		
- 	$CI->load->view($this->_tpl.'/blocks/doctype', $data);
-    $CI->load->view($this->_tpl.'/blocks/header');
-    $CI->load->view($this->_tpl.'/blocks/menu');
-    $CI->load->view($this->_tpl.'/blocks/left_block');
- 	$CI->load->view($this->_tpl.'/'.$view, $data);
- 	$CI->load->view($this->_tpl.'/blocks/right_block');
-    $CI->load->view($this->_tpl.'/blocks/footer');
-	 //    $CI->load->view($view, $data);
-	 //    $CI->load->view('/footer');
+	 	$CI->load->view($this->_tpl.'/blocks/doctype', $data);
+	    $CI->load->view($this->_tpl.'/blocks/header');
+	    $CI->load->view($this->_tpl.'/blocks/menu');
+	    $CI->load->view($this->_tpl.'/blocks/left_block');
+	 	$CI->load->view($this->_tpl.'/'.$view, $data);
+	 	$CI->load->view($this->_tpl.'/blocks/right_block');
+	    $CI->load->view($this->_tpl.'/blocks/footer');
+		
 	}
 
 

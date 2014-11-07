@@ -38,10 +38,23 @@ class Page extends Frontend_Controller{
 
 				$view = 'main/main';
 				//Подключаем виды для гланой страницы
-				$this->display_lib->main_page($view, $data);
+				$this->display_lib->view_page($view, $data);
 
 				$this->output->enable_profiler(TRUE);
 				break;
+			case 'tests':
+
+				$this->load->model('user_model');
+
+			  	if($this->user_model->loggedin() == FALSE)
+		        {
+		           redirect('page/show/main');
+		        } 
+
+				$view = 'tests/show';
+
+				$this->display_lib->user_login($view, $data);
+			break;
 
 			case 'news':
 				//Подключаем виды для страницы новостей 
@@ -68,24 +81,8 @@ class Page extends Frontend_Controller{
 
 				//$this->output->enable_profiler(TRUE);
 				break;
-				case 'tests':
-				$this->load->model('user_model');
-				  if($this->user_model->loggedin() == FALSE)
-		        {
-		           redirect('page/show/main');
-		        } 
-
-				$view = 'tests/show';
-
-				$this->display_lib->user_login($view, $data);
-				break;
-			case 'login':
-
 				
-				$view = 'user/login';
-
-				$this->display_lib->user_login($view, $data);
-				break;
+			
 			// case 'profiles':
 
 

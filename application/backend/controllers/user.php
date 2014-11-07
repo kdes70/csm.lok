@@ -15,6 +15,15 @@ class User extends Frontend_Controller{
 		
 	}
 
+    public function index()
+    {
+        if (!$this->user_model->loggedin())
+        {
+            //redirect them to the login page
+            redirect('user/login', 'refresh');
+        }      
+    }
+
 
 /**
  * login user
@@ -23,53 +32,39 @@ class User extends Frontend_Controller{
     public function login()
     {
         // шаблон для админ панели
-        $dashboard = 'admin/dashboard';
-        $frontend = 'page/show/main';
+        // $dashboard = 'admin/dashboard';
+
+        //$frontend = 'page/show/main';
         // Если залогинен напровляем на админ панель
-        $this->user_model->admin_loggedin() == FALSE /*&& $this->user_model->loggedin() == FALSE*/ || redirect($dashboard);
+      // $this->user_model->loggedin() == FALSE || redirect('/');
        // $this->user_model->loggedin() == FALSE || redirect($frontend);
         // Получаем правила для валидации
         // если пользователь не залогинен и отправил форму
         $rules = $this->user_model->rules;
         // Отпровляем на валидацию
         $this->form_validation->set_rules($rules);
+
         // Валидация успешна 
         if($this->form_validation->run() == TRUE)
         {   
             //Наверно тут будет условие по group
-        // Логин успешен отпровляем в админ панель
+            // Логин успешен отпровляем в админ панель
             if($this->user_model->login() == TRUE)
-            {   
-
-                if($this->user_model->admin_loggedin() == TRUE)
-                {
-                    //Если id_groups = is_admin
-                    //то посылаем в админку 
-                    redirect($dashboard);
-                }
-               
-                redirect($frontend);
-              
-     
-                //А если нет то это просто пользователь 
+            {           
                 //посылаем его на сайт
+                 redirect('/');
+  
             }
-            else{
 
-                // Если нет то выводим ошибку и перенапровляем снова на форму входа
-                $this->session->set_flashdata('error', 'Email или Пароль не верный');
-                redirect('page/show/login', 'refresh');
-            }
+
+            // var_dump((bool)$this->user_model->login());
+            // Если нет то выводим ошибку и перенапровляем снова на форму входа
+           $this->session->set_flashdata('error', 'Email или Пароль не верный');
+            redirect('user/login', 'refresh');
+            
         }
-
-        // //Основной слой вида 
-        // $view = 'admin/_layout_show';
-        // //Вид формы входа в админ панель
-        // $this->data['subview'] = 'admin/admin/user/login';
-        // $this->display_lib->admin_login($view, $this->data);
-        
+  
         $view = 'user/login';
-
         $this->display_lib->user_login($view, $this->data);
     }
 
@@ -83,7 +78,7 @@ class User extends Frontend_Controller{
     public function logout()
     {
         $this->user_model->logout();
-        redirect('page/show/login');
+        redirect('user/login');
     }
 
 
@@ -129,6 +124,10 @@ class User extends Frontend_Controller{
         $this->form_validation->set_rules($rules);
 
         $hash_session = $this->user_model->hash($this->session->userdata('session_id'));
+
+        // $this->form_validation->set_value($rules);
+
+        // var_dump($rules);
 
          if($this->form_validation->run() == TRUE)
         {       
