@@ -16,7 +16,9 @@ class Display_lib
  	$CI->load->view($this->_tpl.'/blocks/doctype', $data);
     $CI->load->view($this->_tpl.'/blocks/header');
     $CI->load->view($this->_tpl.'/blocks/menu');
+    $CI->load->view($this->_tpl.'/blocks/left_block');
  	$CI->load->view($this->_tpl.'/'.$view, $data);
+ 	$CI->load->view($this->_tpl.'/blocks/right_block');
     $CI->load->view($this->_tpl.'/blocks/footer');
 	 //    $CI->load->view($view, $data);
 	 //    $CI->load->view('/footer');

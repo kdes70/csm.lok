@@ -5,7 +5,12 @@
 	<img src="setup/user/avatar/ava.jpg" alt="" width="50px">
 </div>
 <div>
-	<h3><?php echo $user_profile->name. " " .$user_profile->surname. " " .$user_profile->patronymic; ?></h3>
+	
+	<p>
+		Имя:<?php echo $user_profile->name; ?>
+	</p>
+	<p>Отечство: <?php echo $user_profile->surname; ?></p>
+	<p>Фамилия: <?php echo $user_profile->patronymic; ?></p>
 	<p>Email: <?php echo $user_profile->email; ?></p>
 	<p>Profession: <?php echo $user_profile->profession->name; ?></p>
 </div>

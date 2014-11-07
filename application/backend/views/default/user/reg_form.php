@@ -2,9 +2,14 @@
 	
 	<div>
 
-           <?php echo form_open('user/confirmation', 'id="reg_form"'); ?> 
+           <?php echo form_open('user/registration', 'id="reg_form"'); ?> 
 
-           <div id="reg_form_error" class="alert alert-error"><!-- dinamik--></div>
+           <div id="reg_form_error" class="alert alert-error"><!-- dinamik-->
+               <?php echo '<pre>' . print_r($this->session->userdata, TRUE).'</pre>'; ?>
+
+           <?php echo validation_errors(); ?>
+
+           </div>
 
            	<h3 class="message">REGISTRATION</h3>
 
@@ -14,7 +19,7 @@
 
                 <?php
 
-                 $option = array();
+                $option = array();
 
                 foreach($groups as $group): 
                   $option[0] = 'Выберите свой статус';
@@ -40,7 +45,7 @@
               <label for="
                ">Выберите специальность</label><br>
               <?php foreach ($profession as $name):
-                $option[$name->name] = $name->name;
+                $option[$name->id] = $name->name;
               endforeach;?>
               <?php echo form_dropdown('profession', $option, '','disabled="disabled" id="profession" class="testclass"'); ?>
             </p> 

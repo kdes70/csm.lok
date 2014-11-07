@@ -67,7 +67,10 @@ class User extends Frontend_Controller{
         // //Вид формы входа в админ панель
         // $this->data['subview'] = 'admin/admin/user/login';
         // $this->display_lib->admin_login($view, $this->data);
+        
+        $view = 'user/login';
 
+        $this->display_lib->user_login($view, $this->data);
     }
 
 
@@ -106,10 +109,10 @@ class User extends Frontend_Controller{
     }
 
 
-	public function confirmation()
+	public function registration()
 	{
-		//var_dump($data);
-		//	
+		
+		// POST
     	$groups = $this->input->post('groups');
     	$profession = $this->input->post('profession');
 
@@ -120,72 +123,62 @@ class User extends Frontend_Controller{
     	$email = $this->input->post('email');
     	$email_confirm = $this->input->post('email_confirm');
 
+        // Валидация
+        $rules = $this->user_model->rules_reg;
+        // Отпровляем на валидацию
+        $this->form_validation->set_rules($rules);
 
-    	//Первым делом проверяем поле groups
-    	if($groups == 1)
-    	{//Если сотрудник
-			//Профессия обезательна
-			//$profession = $this->input->post('profession');
-    		$data = array(
-    			'id_groups' => $groups,
-    			'login'=> 'Сотрудник ЦСМ',
-    			'email' => $email,
-    			'password' => '',
-    			'id_role' => '0',
-    			'status' => '1',
-    			'profession' => $profession,
-    			'name' => $name,
-    			'surname' => $surname,
-    			'patronymic' => $patronymic,
-    			'hash' => 'dsfsdfdfsdfsdfdsfsdfdsf',//id_session
+        $hash_session = $this->user_model->hash($this->session->userdata('session_id'));
 
-    			);	
-    	} 
-    	elseif ($groups == 2) 
-    	{//Если врач
-    		$data = array(
-    			'id_groups' => $groups,
-    			'login'=> 'Врач',
-    			'email' => $email,
-    			'password' => '',
-    			'id_role' => '0',
-    			'status' => '1',
-    			'profession' => $profession,
-    			'name' => $name,
-    			'surname' => $surname,
-    			'patronymic' => $patronymic,
-    			'hash' => 'dsfsdfdfsdfsdfdsfsdfdsf',//id_session
+         if($this->form_validation->run() == TRUE)
+        {       
+            $hash_session = $this->user_model->hash($this->session->userdata('session_id'));
 
-    			);
-    	}
-    	else
-    	{//Если гость
+            //Если гость
+            $data = array(
+                'id_groups' => $groups,
+                'login'=> 'Гость',
+                'email' => $email,
+                'password' => $hash_session,
+                'status' => '0',
+                'name' => $name,
+                'surname' => $surname,
+                'patronymic' => '',
+                'hash' => $hash_session//id_session
+                );
 
-    		$data = array(
-    			'id_groups' => $groups,
-    			'login'=> 'Гость',
-    			'email' => $email,
-    			'password' => '',
-    			'id_role' => '0',
-    			'status' => '1',
-    			'profession' => $profession,
-    			'name' => $name,
-    			'surname' => $surname,
-    			'patronymic' => '',
-    			'hash' => 'dsfsdfdfsdfsdfdsfsdfdsf',//id_session
-    			);
-    	}
-    	
-    	if($data)
-    	{//Отправляем на запись 
-    		$id_user = $this->user_model->save($data);
+        	//Первым делом проверяем поле groups
+        	if($groups == 3 || $groups == 4)
+        	{//Если сотрудник
+    			//Профессия обезательна
+    			$profession = $this->input->post('profession');
+        		$data = array(
+        			'id_groups' => $groups,
+        			'login'=> 'Пользовател',
+        			'email' => $email,
+                    'password' => $hash_session,
+        			'status' => '1',
+        			'profession' => $profession,
+        			'name' => $name,
+        			'surname' => $surname,
+        			'patronymic' => $patronymic,
+        			'hash' => $hash_session//TODO COOcie md5($this->session->userdata('session_id').SOLD)
 
-    		if($id_user)
-    		{	
-    			//$this->session->set_userdata(['id_user' => $id_user]);	
-    			//return true;
-    		}
-    	}
+        			);	
+        	} 
+        	
+      	
+        	//Отправляем на запись 
+        		$id_user = $this->user_model->save($data);
+
+        		if($id_user)
+        		{	
+        			//$this->session->set_userdata(['id_user' => $id_user]);	
+        			//return true;
+                   
+                     redirect('user/activate/'.$hash_session.$id_user);
+        		}
+    	   
     	
     	
     	
@@ -193,12 +186,38 @@ class User extends Frontend_Controller{
 		
 		//перенапровляем на личный кобинет для продолженья регистрации
 		
-
+    }
+    else
+    {
+         // Если нет то выводим ошибку и перенапровляем снова на форму входа
+        $this->session->set_flashdata('error', 'Регистрация не удалась');
+       // redirect('page/show/registration', 'refresh');
+    }
+       
 		$this->output->enable_profiler(TRUE);
 //	return false;	
+//    
+//          // Данные из таблицы Group
+            $this->load->model('group_model');
+            $this->data['groups'] = $this->group_model->get_by(array('public' => '1'));
+
+            //var_dump($this->data);
+
+            // if(isset($_POST['user_status'])) 
+            // получаем данные из таблицы profession    
+            $this->load->model('profession_model');
+            $this->data['profession'] = $this->profession_model->get();
+//    
+//    
+            $view = 'user/reg_form';
+                //Подключаем виды для гланой страницы
+            $this->display_lib->reg_page($view, $this->data);
 	}
 
-
+    public function activate($id_hash)
+    {
+       echo "ACTIVATE";
+    }
 
 
 /**

@@ -66,10 +66,22 @@ class Page extends Frontend_Controller{
 				//Подключаем виды для гланой страницы
 				$this->display_lib->reg_page($view, $this->data);
 
-				$this->output->enable_profiler(TRUE);
+				//$this->output->enable_profiler(TRUE);
+				break;
+				case 'tests':
+				$this->load->model('user_model');
+				  if($this->user_model->loggedin() == FALSE)
+		        {
+		           redirect('page/show/main');
+		        } 
+
+				$view = 'tests/show';
+
+				$this->display_lib->user_login($view, $data);
 				break;
 			case 'login':
 
+				
 				$view = 'user/login';
 
 				$this->display_lib->user_login($view, $data);

@@ -57,7 +57,7 @@ class User_Model extends MY_Model
         'profession' => array(
             'field' => 'profession',
             'label' => 'profession',
-            'rules' => 'trim|is_natural'
+            'rules' => 'trim|xxs_clean'
         ),
         'name' => array(
             'field' => 'name',
@@ -88,7 +88,7 @@ class User_Model extends MY_Model
 			'password' => $this->hash($this->input->post('password')), 
 			), TRUE);
 
-	    if($user->id_groups > 0)
+	    if($user->id_groups)
 		{	
 			$this->load->model('group_model');
 			//$group = $this->group_model->get_by(array('id_group'=> $user->id_groups), TRUE);
@@ -115,6 +115,15 @@ class User_Model extends MY_Model
 		  	  
 		}
 	}
+
+    public function registration()
+    {
+        //проверить на уникальность emaila
+        
+        // Если запись в БД успешна
+        
+        //посылаем письмо с активацией
+    }
 
 	public function confirmation()
 	{
@@ -168,6 +177,7 @@ class User_Model extends MY_Model
         
 
         $data = $this->get($id_user);
+        
         if($data->profession)
         {
              $data->profession = $this->get_profession($data->profession);

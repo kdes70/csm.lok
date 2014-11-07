@@ -17,11 +17,11 @@
 	</p>
 	<?php else: ?>
 		<p>
-			<?php echo anchor('page/show/login', '<i class="fa fa-sign-out"></i>log in', ''); ?>
+			<?php echo anchor('user/login', '<i class="fa fa-sign-out"></i>log in', ''); ?>
 		</p>
 
 		<p>
-		<?php echo anchor('page/show/registration', '<i class="fa fa-newspaper-o"></i>registration', 'attributs'); ?>
+		<?php echo anchor('user/registration', '<i class="fa fa-newspaper-o"></i>registration', 'attributs'); ?>
 		</p>
 	<?php endif; ?>
 	<?php if($this->session->userdata('is_admin') == TRUE): ?>
