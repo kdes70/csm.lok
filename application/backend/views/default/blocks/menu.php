@@ -7,7 +7,7 @@
 	<?php else: ?>
 		<li><a href="">пункт2</a></li>
 	<?php endif; ?>
-		<li><a href="">пункт3</a></li>
+		<li><?php echo anchor('page/show/vacansy', 'Вакансии'); ?></li>
 		<li><a href="">пункт4</a></li>
 		<li><a href="">пункт5</a></li>
 	</ul>

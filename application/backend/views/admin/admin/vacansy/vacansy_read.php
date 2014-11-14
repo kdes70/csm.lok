@@ -31,9 +31,19 @@
 	</nav>
 <section id="content" class="">
 
-<?php $this->load->view($subview); ?>
+<div id="main">
+
+	<div> <?php echo anchor('admin/vacansy', 'Назад');?>  </div>
+       
+     <h3><?php echo $vacansy_read->title; ?></h3> 
+     <?php foreach($vacansy_read as $key => $item): ?>
+            <p><?php echo $key; ?> :  <?php echo $item; ?> </p>
+     <?php endforeach; ?>
+            
+</div>
 	
 </section><!-- /content -->
 	
-
+ <div class="clear"></div>
+           	
 </div>

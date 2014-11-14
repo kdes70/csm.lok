@@ -65,11 +65,19 @@ i.fa { margin-right: 5px; }
 .hidden {
 display: none;
 }
+
+form fieldset > p{
+	padding: 10px;
+}
+fieldset {
+	padding: 10px;
+	margin: 10px;
+}
 /*-----SECTION BLOCKS------*/
 
 #wrepper{
 	width: 1024px;
-	height: 1000px;
+	
 	margin: 0 auto;
 	outline: 1px solid red;
 }
@@ -116,7 +124,7 @@ nav#top_menu{
 /*----REGISTRATION----*/
 .form_field{
 	position: relative;
-	width: 51%;
+	width: 56%;
 	height: 50px;
 	margin: 0 auto;
 }
@@ -131,5 +139,6 @@ footer#footer{
 }
 /*======USERS=====*/
 .table_block table {
-margin: 20px auto;
+margin: 30px auto;
+width: 80%;
 }

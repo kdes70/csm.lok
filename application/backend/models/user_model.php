@@ -90,12 +90,12 @@ class User_Model extends MY_Model
 
         $this->load->model('group_model');
 
-	    if($user->id_groups)
+	    if($user->id_group)
 		{	
 			
-			//$group = $this->group_model->get_by(array('id_group'=> $user->id_groups), TRUE);
+			//$group = $this->group_model->get_by(array('id_group'=> $user->id_group), TRUE);
 			// Проверяем относится ли пользователь к группе админов
-			if($this->is_admin($user->id_groups) == TRUE)
+			if($this->is_admin($user->is_admin) == TRUE)
 			{
 				 $this->session->set_userdata(array('is_admin' =>TRUE));
 			}
@@ -105,10 +105,9 @@ class User_Model extends MY_Model
 		if(count($user))
 		{   //Log in user
 		    $data = array(
-		        'login' => $user->login,
 		        'email' => $user->email,
 		        'id_user' => $user->id_user,
-		        'group' => $user->id_groups,
+		        'group' => $user->id_group,
 		        'loggedin' =>TRUE,
 		      
 		    );
@@ -166,7 +165,7 @@ class User_Model extends MY_Model
  * @param  [type]  $id_groups [description]
  * @return boolean            [description]
  */
-    public function is_admin($id_groups)
+    public function is_groups($id_groups)
     {
     	//var_dump($this->_is_admin);
     	//$id_groups = $this->session->userdata('group');
@@ -174,6 +173,11 @@ class User_Model extends MY_Model
     	 return (bool)array_key_exists($id_groups, $this->_is_admin);
     	 
     
+    }
+
+    public function is_admin($is_admin)
+    {
+        return (bool) $is_admin == 1;
     }
 
     public function get_profiles($id_user)
@@ -189,6 +193,7 @@ class User_Model extends MY_Model
         // TODO продумать исключение  
         $data->profession = (object)array('name'=>'Нет профессии');
         return $data;
+
     }
 
     public function get_profession($id_prof)
@@ -200,7 +205,10 @@ class User_Model extends MY_Model
 
 
 // is role user
+    public function get_roles($id_user)
+    {
 
+    }
 // is prova of user
 
 

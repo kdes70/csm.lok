@@ -23,7 +23,7 @@
            <?php echo form_close(); ?>
         <div>
            <p><a href="#">Забыли пароль?</a></p>
-           <p><?php echo anchor('page/show/registration', 'Регистрация'); ?></p>
+           <p><?php echo anchor('user/registration', 'Регистрация'); ?></p>
 		</div>
            
 	

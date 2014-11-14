@@ -12,7 +12,7 @@ class User extends Frontend_Controller{
 		parent::__construct();
 
 		$this->load->model('user_model');
-		
+		$this->load->helper('csm_helper');
 	}
 
     public function index()
@@ -21,7 +21,10 @@ class User extends Frontend_Controller{
         {
             //redirect them to the login page
             redirect('user/login', 'refresh');
-        }      
+        } 
+
+      
+
     }
 
 
@@ -55,9 +58,6 @@ class User extends Frontend_Controller{
                  redirect('/');
   
             }
-
-
-            // var_dump((bool)$this->user_model->login());
             // Если нет то выводим ошибку и перенапровляем снова на форму входа
            $this->session->set_flashdata('error', 'Email или Пароль не верный');
             redirect('user/login', 'refresh');
@@ -96,6 +96,13 @@ class User extends Frontend_Controller{
         $view = 'user/profiles';
         $this->display_lib->user_profile($view, $this->data);
 
+
+        $this->load->model('roles_model');
+
+        $roles = $this->roles_model->get_roles();
+
+        var_dump($roles);
+
     }
 
     public function options()
@@ -125,20 +132,24 @@ class User extends Frontend_Controller{
 
         $hash_session = $this->user_model->hash($this->session->userdata('session_id'));
 
+        $pass = password_generate(8);
+        //$password = $this->user_model->hash($pass['password']);
         // $this->form_validation->set_value($rules);
 
         // var_dump($rules);
 
          if($this->form_validation->run() == TRUE)
         {       
-            $hash_session = $this->user_model->hash($this->session->userdata('session_id'));
+           
+
+
 
             //Если гость
             $data = array(
-                'id_groups' => $groups,
+                'id_group' => $groups,
                 'login'=> 'Гость',
                 'email' => $email,
-                'password' => $hash_session,
+                'password' => $pass['hash'],
                 'status' => '0',
                 'name' => $name,
                 'surname' => $surname,
@@ -152,10 +163,10 @@ class User extends Frontend_Controller{
     			//Профессия обезательна
     			$profession = $this->input->post('profession');
         		$data = array(
-        			'id_groups' => $groups,
+        			'id_group' => $groups,
         			'login'=> 'Пользовател',
         			'email' => $email,
-                    'password' => $hash_session,
+                    'password' => $pass['hash'],
         			'status' => '1',
         			'profession' => $profession,
         			'name' => $name,
@@ -174,8 +185,31 @@ class User extends Frontend_Controller{
         		{	
         			//$this->session->set_userdata(['id_user' => $id_user]);	
         			//return true;
+                    $this->load->library('email');
+
+
+                    $this->email->clear();
+                    $this->email->set_newline("\r\n");
+                    $this->email->from('admin@mail.ru', 'HR-manager');
+                    $this->email->to($email);
+                    $this->email->subject('Данные о регистрации');
+                    $this->email->message('Вы зарегистрировались на сайте 
+                                            Email: '.$email.' Пароль: '.$pass['password']
+                                            );
+                    if ( $this->email->send() )
+                    {
+                        redirect('page/show/main');
+                        return TRUE;
+                    }
+                    else
+                    {
+                       
+                        return FALSE;
+                    }
+
+                       // redirect('page/show/main');
                    
-                     redirect('user/activate/'.$hash_session.$id_user);
+                   //  redirect('user/activate/'.$hash_session.$id_user);
         		}
     	   
     	

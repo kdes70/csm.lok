@@ -81,7 +81,15 @@ class Page extends Frontend_Controller{
 
 				//$this->output->enable_profiler(TRUE);
 				break;
-				
+			case 'vacansy':
+
+
+			$this->load->model('localis_model');
+			$data['local'] = $this->localis_model->get();
+
+			$view = 'vacansy/vacansy';
+			$this->display_lib->user_login($view, $data);
+				break;
 			
 			// case 'profiles':
 
