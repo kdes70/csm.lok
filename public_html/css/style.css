@@ -156,3 +156,12 @@ min-height: 300px;
 #left_block{ width: 200px; height: 300px; outline: 1px solid; float: left;
 
 }
+
+
+.vacansy_row {
+width: 80%;
+margin: 30px auto;
+outline: 1px dashed;
+padding: 10px;
+/* margin: 1; */
+}

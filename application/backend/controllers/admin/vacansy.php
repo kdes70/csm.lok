@@ -35,6 +35,17 @@ class Vacansy extends Admin_Controller{
 		$this->display_lib->dashboard($view, $this->data);
 	}
 
+	public function public_view($id_vac)
+	{
+		$id = $this->vacansy_model->save(array('public' => '1'), $id_vac);
+
+		if($id)
+		{
+			redirect('admin/vacansy');
+		}
+
+	}
+
 	public function add_vacansy()
 	{
 

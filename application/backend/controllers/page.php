@@ -60,26 +60,7 @@ class Page extends Frontend_Controller{
 				//Подключаем виды для страницы новостей 
 				break;
 			case 'registration':
-				//$data = array();
-				// user model
-				// 
-				// Данные из таблицы Group
-				$this->load->model('group_model');
-				$this->data['groups'] = $this->group_model->get_by(array('public' => '1'));
-
-				//var_dump($this->data);
-
-				// if(isset($_POST['user_status'])) 
-				// получаем данные из таблицы profession	
-				$this->load->model('profession_model');
-				$this->data['profession'] = $this->profession_model->get();
 			
-				// views
-				$view = 'user/reg_form';
-				//Подключаем виды для гланой страницы
-				$this->display_lib->reg_page($view, $this->data);
-
-				//$this->output->enable_profiler(TRUE);
 				break;
 			case 'vacansy':
 
@@ -87,8 +68,12 @@ class Page extends Frontend_Controller{
 			$this->load->model('localis_model');
 			$data['local'] = $this->localis_model->get();
 
+			$this->load->model('vacansy_model');
+			$data['vac'] = $this->vacansy_model->get_by(array('public' => '1'));
+
+			
 			$view = 'vacansy/vacansy';
-			$this->display_lib->user_login($view, $data);
+			$this->display_lib->view_page($view, $data);
 				break;
 			
 			// case 'profiles':

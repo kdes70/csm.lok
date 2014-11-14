@@ -39,6 +39,8 @@
      <?php foreach($vacansy_read as $key => $item): ?>
             <p><?php echo $key; ?> :  <?php echo $item; ?> </p>
      <?php endforeach; ?>
+
+     <div> <?php echo anchor('admin/vacansy/public_view/'.$vacansy_read->id_vac, 'Опубликовать');?>  </div>
             
 </div>
 	

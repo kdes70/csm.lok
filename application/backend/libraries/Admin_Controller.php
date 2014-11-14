@@ -12,14 +12,14 @@ class Admin_Controller extends MY_Controller
         
         //Login check
         $exception_uris = array(
-            'admin/user/login', 
-            'admin/user/logout'
+            'user/login', 
+            'user/logout'
             );
         if(in_array(uri_string(),  $exception_uris) == FALSE)
         {
             if ($this->user_model->admin_loggedin() == FALSE)
             {
-                redirect('admin/user/login');
+                redirect('user/login');
             }
         }
         

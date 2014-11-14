@@ -67,7 +67,7 @@
 				?>
 
 				<?php endforeach; ?>
-			  <?php echo form_dropdown('local', $option, $author->id_local, 'disabled="disabled" id="local"'); ?> 
+			  <?php echo form_dropdown('local', $option, $author->id_local, ' id="local"'); ?> 
 			<?php endif; ?>
 
 				</p>
