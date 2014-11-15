@@ -1,6 +1,6 @@
 <?php
 
-class MY_User_Model extends MY_Model
+class Roles_Model extends MY_User_Model
 {
 	protected $_table_name = 'users';
     protected $_primary_key = 'id_user';
@@ -19,14 +19,9 @@ class MY_User_Model extends MY_Model
 	}
 
 	public function index()
-	{
-		echo 'Hiloy';
+	{	
+		echo 'ROLES';
 	}
 
-	public function admins()
-	{
-		return $this->_is_admin;
-	}
 
-	
 }
