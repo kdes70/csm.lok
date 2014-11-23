@@ -2,7 +2,9 @@
 	<div>
            <?php echo form_open('admin/auth/login', 'id="auth_form"'); ?> 
 
-           <div id="reg_form_error" class="alert alert-error"><!-- dinamik--></div>
+            <div id="reg_form_error" class="alert alert-error"><!-- dinamik-->
+           <?php echo validation_errors(); ?>
+           </div>
 
            	<h3 class="message">Вход для администрации</h3>
              

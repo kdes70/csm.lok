@@ -82,6 +82,7 @@ class Auth extends Admin_Controller{
                     redirect($dashboard);
                 }else{
                     $this->session->set_flashdata('error', 'Сочетание электронной почты / пароль не существует!' );
+
                     redirect('admin/auth/login', 'refresh');
                 }
 		}

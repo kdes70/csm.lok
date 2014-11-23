@@ -24,7 +24,7 @@ class MY_Model extends CI_Model
      * @param  boolean $single
      * @return 
      */
-    public function get($id = NULL,  $single = FALSE)
+    public function get($id = NULL,  $single = FALSE, $count = FALSE)
     {
         if($id != NULL)
         {
@@ -44,6 +44,10 @@ class MY_Model extends CI_Model
         {
             $this->db->order_by($this->_order_by);
         }
+        if($count == TRUE)
+        {
+            $method = 'num_rows';
+        }
         return $this->db->get($this->_table_name)->$method();
     }
 
@@ -53,10 +57,10 @@ class MY_Model extends CI_Model
      * @param  boolean $single
      * @return [type]
      */
-    public function get_by($where, $single = FALSE)
+    public function get_by($where, $single = FALSE, $count = FALSE)
     {
         $this->db->where($where);
-        return $this->get(NULL, $single);
+        return $this->get(NULL, $single, $count);
     }
 
     /**

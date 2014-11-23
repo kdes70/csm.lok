@@ -123,6 +123,15 @@ class Vacansy_Model extends MY_Model
 		return FALSE;
 	}
 
+    public function count_vacansy_by_category($cat)
+    {
+        return $this->db
+            ->where('id_cat', $cat)
+            ->count_all_results($this->_table_name);
+    }
+
+
+
 	public function get_vacansy()
 	{	
 
