@@ -9,6 +9,31 @@ class Vacansy_Model extends MY_Model
     protected $_timestamps = TRUE;
 
  	public $rules = array(
+        'city' => array(
+            'field' => 'city',
+            'label' => 'city',
+            'rules' => 'required'
+        ),
+        'category' => array(
+            'field' => 'category',
+            'label' => 'category',
+            'rules' => 'required|integer|numeric|callback__is_null'
+        ),
+        'contact' => array(
+            'field' => 'contact',
+            'label' => 'contact',
+            'rules' => 'trim|required|xxs_clean'
+        ),
+        'email' => array(
+            'field' => 'email',
+            'label' => 'email',
+            'rules' => 'trim|required|valid_email|xxs_clean'
+        ),
+        'phone' => array(
+            'field' => 'title',
+            'label' => 'title',
+            'rules' => 'trim|required|xxs_clean'
+        ),
  		'title' => array(
  		    'field' => 'title',
  		    'label' => 'title',
@@ -17,9 +42,9 @@ class Vacansy_Model extends MY_Model
         'reason' => array(
             'field' => 'reason',
             'label' => 'reason',
-            'rules' => 'trim|required'
+            'rules' => 'trim'
         ),
-        'count_candidate' => array(
+       /* 'count_candidate' => array(
             'field' => 'count_candidate',
             'label' => 'count_candidate',
             'rules' => 'trim|required'
@@ -28,21 +53,21 @@ class Vacansy_Model extends MY_Model
             'field' => 'planned_date',
             'label' => 'planned_date',
             'rules' => 'trim|required'
-        ),
+        ),*/
         'desc_candidate' => array(
             'field' => 'desc_candidate',
             'label' => 'desc_candidate',
-            'rules' => 'trim|required'
+            'rules' => 'trim'
         ),
         'education' => array(
             'field' => 'education',
             'label' => 'education',
-            'rules' => 'trim|required'
+            'rules' => 'trim'
         ),
         'profes_profession' => array(
             'field' => 'profes_profession',
             'label' => 'profes_profession',
-            'rules' => 'trim|required'
+            'rules' => 'trim'
         ),
         'special_requirement' => array(
             'field' => 'special_requirement',
@@ -52,41 +77,39 @@ class Vacansy_Model extends MY_Model
         'other_requirements' => array(
             'field' => 'other_requirements',
             'label' => 'other_requirements',
-            'rules' => 'trim|required'
+            'rules' => 'trim'
         ),
         'workplace' => array(
             'field' => 'workplace',
             'label' => 'workplace',
-            'rules' => 'trim|required'
+            'rules' => 'trim'
         ),
         'schedule' => array(
             'field' => 'schedule',
             'label' => 'schedule',
-            'rules' => 'trim|required'
+            'rules' => 'trim'
         ),
         'nature_work' => array(
             'field' => 'nature_work',
             'label' => 'nature_work',
-            'rules' => 'trim|required'
+            'rules' => 'trim'
         ),
         'wage_rate' => array(
             'field' => 'wage_rate',
             'label' => 'wage_rate',
-            'rules' => 'trim|required'
+            'rules' => 'trim'
         ),
         'wage_structure' => array(
             'field' => 'wage_structure',
             'label' => 'wage_structure',
-            'rules' => 'trim|required'
+            'rules' => 'trim'
         ),
         'additional_terms' => array(
             'field' => 'additional_terms',
             'label' => 'additional_terms',
-            'rules' => 'trim|required'
+            'rules' => 'trim'
         )
     );
-
-
 
 	public function save_vacansy($data = array())
 	{

@@ -65,83 +65,101 @@ i.fa { margin-right: 5px; }
 .hidden {
 display: none;
 }
+.red{
+	color: #E90B00;
+}
+
+.line_top {
+    height: 25px;
+    width: 100%;
+    background-color: #dddbdb;
+}
+.tel{
+	width: 175px !important;
+	height: 45px;
+	margin-left: 20px;
+}
 /*-----SECTION BLOCKS------*/
 
 #wrepper{
 	width: 1024px;
-	height: 1000px;
 	margin: 0 auto;
-	outline: 1px solid red;
+	min-height: 700px;
+	/*border: 1px solid #dddbdb;*/
 }
 /*----HEADER----*/
 header#header{
 	width: 100%;
-	height: 80px;
-	outline: 1px solid blue;
-}
-#logo_block{
-	width: 50%;
 	height: 60px;
-	float: left;
+	margin-bottom: 40px;
 }
-#auth_block{
- 	height: 65px; 
- 	width: 50%;
- 	float: right;
+#logo_block{ 
+	float: left; 
+	margin-right: 20px;
 }
-#auth_block p{ float: right; margin: 20px;
+
+/*----MENU----*/
+div#menu_block {
+	width: 782px;
+    height: 60px;
+    padding-top: 20px;
+    border-bottom: 1px solid #DDDBDB;
+    margin-left: 240px;;
+}
+#menu_block nav{ height: 40px;
 
 }
-/*----MENU----*/
-nav#top_menu{
-	width: 100%;
-	outline: 1px solid black;
-	height: 40px;
-}
-#top_menu ul li{
+#menu_block nav li{
 	text-align: center;
-	border-right: 1px solid;
-	line-height: 40px;
-	width: 20%;
+	line-height: 43px;
+	width: 24%;
 	float: left;
+	
 }
-	#top_menu ul li:last-child{
+#menu_block nav li:last-child{
 		border-right: 0;
 	}
-#top_menu ul li a{
-	height: 40px;
-	display: block;
+#menu_block nav li a{
+	color: #9C9C9E;
+	font-size: 22px
+}
+#menu_block nav li a:hover{
+	color: #495A9A;
+}
+/*-----LEFT_BLOCK-----*/
+#left_block{
+	width: 240px; 
+	height: 300px;
+	float: left; 
 }
 
-/*----REGISTRATION----*/
-.form_field{
-	position: relative;
-	width: 56%;
-	height: 50px;
-	margin: 0 auto;
+.title_left{
+	height: 34px;
+	background-color: #495A9A;
+	margin: 0 7px;
+	color: #fff;
+	line-height: 34px;
+	font-size: 20px;
 }
-div.form_field p{
-	float: left;
-}
-footer#footer{
+.left_content{
+	border: 1px solid #DDDBDB;
 	width: 100%;
-	height: 40px;
-	position: relative;
-	outline: 1px solid black;
+	min-height: 300px;
+	padding: 10px;
+}
+.left_section{
+	margin-bottom: 20px;
+}
+.left_section p{
+	margin-bottom: 10px;
 }
 
-/*===PROFILE===*/
-.Profile_block {
-padding: 10px;
-}
 /*====MAIN====*/
-div#main {
-padding: 20px;
-min-height: 300px;
-}
 #content{
-	width: 100%;
-	height: 400px;
+	width: 783px;
+	padding: 10px;
+	float: right;
+	min-height: 400px;
 }
 #content section {
 	width: 62%;
@@ -149,19 +167,63 @@ min-height: 300px;
 	margin: 0 auto;
 	float: left;
 }
-#right_block{ width: 184px; height: 300px; outline: 1px solid; float: right;
+
+/*-----VACANSY-----*/
+.row_vacansy{ margin: 20px auto; width: 90%;
 
 }
-
-#left_block{ width: 200px; height: 300px; outline: 1px solid; float: left;
-
+.row_vacansy a{
+	color: #495A9A;
+}
+.price{
+	font-size: 12px;
+	color: #E10000;
 }
 
 
-.vacansy_row {
-width: 80%;
-margin: 30px auto;
-outline: 1px dashed;
-padding: 10px;
-/* margin: 1; */
+footer#footer{
+	width: 100%;
+	height: 40px;
+	float: left;
+	padding: 10px;
+	position: relative;
+	background: #DDDBDB;
+}
+#auth{
+	width: 16px;
+	float: right;
+}
+#auth img{ position: relative;
+}
+/*----FORM_VACANSY-----*/
+.vacansy_form_block{
+	width: 760px;
+	margin: auto;
+}
+.vacansy_form_block > p{
+	margin: 15px;
+}
+.vacansy_form_block p input,
+.vacansy_form_block select{
+	width: 300px;
+	height: 25px;
+}
+
+form fieldset > p{
+	padding: 10px;
+}
+fieldset {
+	padding: 10px;
+	margin: 10px;
+	border: 1px solid #9C9C9E;
+}
+.vacansy_form_block legend{
+	color: #fff;
+	padding: 7px;
+	background: #495A9A;
+}
+.form_field{ width: 90%; height: 55px; margin: 0 auto;
+}
+div.form_field p{
+	float: left;
 }

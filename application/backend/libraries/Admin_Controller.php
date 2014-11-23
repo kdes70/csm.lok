@@ -8,18 +8,18 @@ class Admin_Controller extends MY_Controller
       //  $this->load->helper('form');
         $this->load->library('form_validation');
      //   $this->load->library('session');
-        $this->load->model('user_model');
+        $this->load->model('admin_model');
         
         //Login check
         $exception_uris = array(
-            'user/login', 
-            'user/logout'
+            'admin/auth/login', 
+            'admin/auth/logout'
             );
         if(in_array(uri_string(),  $exception_uris) == FALSE)
         {
-            if ($this->user_model->admin_loggedin() == FALSE)
+            if ($this->admin_model->loggedin() == FALSE)
             {
-                redirect('user/login');
+                redirect('admin/auth/login');
             }
         }
         

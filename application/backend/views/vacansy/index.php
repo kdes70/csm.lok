@@ -22,41 +22,77 @@
 	<title>ЦСМ-центр семейной медецины</title>
 </head>
 <body>
+<div class="line_top"></div>
 <div id="wrepper">
-<header id="header" class="">
-<div id="logo_block">
-	logotip
-</div>
-<div id="auth_block">
-	<p>
-		<a href=""><i class="fa fa-sign-out"></i>log in</a>
-	</p>
-	<p>
-		
-		<?php echo anchor('auth', '<i class="fa fa-newspaper-o"></i>registration', 'attributs'); ?>
-	</p>
-</div>
-	
-</header><!-- /header -->
-<nav id="top_menu">
-		<ul>
-			<li><a href="">пункт1</a></li>
-			<li><a href="">пункт2</a></li>
-			<li><a href="">пункт3</a></li>
-			<li><a href="">пункт4</a></li>
-			<li><a href="">пункт5</a></li>
-		</ul>
-	</nav>
+    <header id="header" class="">
+    <div id="logo_block">
+       <a href="/"><img src="<?php echo site_url('images/logo.jpg'); ?>" alt=""></a>
+    </div>
+    <div id="menu_block">
+       <nav>
+            <ul>
+                <li><a href="">Главная цсм</a></li>
+                <li><a href="">Вакансии</a></li>
+                <li><a href="">Подать резюме</a></li>
+                <li class="tel"><img src="<?php echo site_url('images/tel2.png'); ?>" alt=""></li>
+            </ul>
+        </nav>
+        
+    </div>
+   
+    </header><!-- /header -->
+<aside id="left_block">
+    <div class="title_left">Вакансии</div>
+    <div class="left_content">
+    <div class="left_section">
+        <h3>Выберите ваш город</h3>
+        <p><?php echo anchor('vacansy/city/tomsk', 'Томск'); ?></p>
+        <p><?php echo anchor('vacansy/city/novosibirsk', 'Новосибирск'); ?></p>
+    </div>
+    <div class="left_section" style="font-size: 14px">
+        <h3>Категории</h3>
+        <p><?php echo anchor('vacansy/', 'Старший мед-персонал(10)'); ?></p>
+        <p><?php echo anchor('vacansy/', 'Средний мед-персонал(10)'); ?></p>
+        <p><?php echo anchor('vacansy/', 'Младший мед-персонал(10)'); ?></p>
+        <p><?php echo anchor('vacansy/', 'Административная часть(10)'); ?></p>
+    </div>
+    </div>
+</aside>
 <section id="content" class="">
 
-<?php  include 'auth_form.php'; ?>
+    <h3>Страница вокансий цсм</h3>
+    <div>
+    <ul >
+        <li class="row_vacansy"><a href=""><h3>название вакансии</h3></a>
+            <p>краткое описание вакансии</p>
+            <p class="price">20 000 руб.</p>
+        </li>
+       <li class="row_vacansy"><a href=""><h3>название вакансии</h3></a>
+            <p>краткое описание вакансии</p>
+            <p class="price">Заработная  плата по результатам собеседования</p>
+         </li>
+         <li class="row_vacansy"><a href=""><h3>название вакансии</h3></a>
+            <p>краткое описание вакансии</p>
+            <p class="price">Заработная  плата по результатам собеседования</p>
+         </li>
+    </ul>
 	
+      
+
+    </div>
 </section><!-- /content -->
 	
 
 </div>
 <footer id="footer">
-	<div id="copyrights"> &#169; ЦСМ - <?php echo date('Y'); ?></div>
+	<div id="copyrights"> &#169; ЦСМ - <?php echo date('Y'); ?>&nbsp;|&nbsp;<a href="http://0370.ru/" target="_blank">ООО ЦСМ</a>
+        <div id="auth">
+           <a href="<?php echo site_url('admin/auth/login'); ?>">
+            <img src="<?php echo site_url('images/key.png'); ?>" alt="">
+           </a>
+        </div>
+    </div>
+
 </footer>
 </body>
 </html>

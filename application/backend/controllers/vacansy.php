@@ -15,10 +15,27 @@ class Vacansy extends Frontend_Controller{
  * @return [type] [description]
  */
 	public function index()
+	{	//Вакансии
+		$this->load->model('vacansy_model');
+		$this->data['vacansy'] = $this->vacansy_model->get();
+		//Категории
+		$this->load->model('category_model');
+		$this->data['category'] = $this->category_model->get();
+
+		$this->output->enable_profiler(TRUE);
+        $this->display_lib->view_page('vacansy', $this->data);
+		//var_dump($data);
+	}
+
+	public function cat($id_cat)
 	{	
 
-        $this->display_lib->view_developer_page();
-		//var_dump($data);
+		//Категории
+		$this->load->model('category_model');
+		$this->data['category'] = $this->category_model->get();
+
+		$this->output->enable_profiler(TRUE);
+        $this->display_lib->view_page('vacansy', $this->data);
 	}
 
 
