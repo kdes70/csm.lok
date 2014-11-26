@@ -17,8 +17,7 @@ img { border: none; max-width: 100%; height: auto; }
 
 article, aside, figure, footer, header, hgroup, nav, section {display: block;}
 
-hr{
-	margin: 10px auto;
+hr{ margin: 10px auto;
 }
 label{vertical-align: middle;}
 
@@ -49,9 +48,9 @@ html{
 body{
 	height: 100%;
 	color: #3E4156;
-	font-weight: 600;
 	text-align: center;
 	line-height: normal;
+	background-color: #DDDBDB !important;
 }
 
 /* = Убираем обводку при клике на элементы форм и др. */
@@ -68,7 +67,9 @@ display: none;
 .red{
 	color: #E90B00;
 }
-
+.page_title{
+	margin-bottom: 40px;
+}
 .line_top {
     height: 25px;
     width: 100%;
@@ -79,11 +80,26 @@ display: none;
 	height: 45px;
 	margin-left: 20px;
 }
+
+.alert-error{ color: #E12004; font-size: 14px;
+
+}
+
+#form_error{
+	margin: 10px auto;
+	/* padding: 15px;
+	background: rgba(208, 0, 0, 0.27);
+	border: 5px solid #DD0C01;
+	border-radius: 10px;
+	display: none; */
+}
 /*-----SECTION BLOCKS------*/
 
 #wrepper{
 	width: 1024px;
 	margin: 0 auto;
+	background-color: #fff;
+	padding: 10px;
 	min-height: 700px;
 	/*border: 1px solid #dddbdb;*/
 }
@@ -91,7 +107,7 @@ display: none;
 header#header{
 	width: 100%;
 	height: 60px;
-	margin-bottom: 40px;
+	margin-bottom: 30px;
 }
 #logo_block{ 
 	float: left; 
@@ -102,9 +118,9 @@ header#header{
 div#menu_block {
 	width: 782px;
     height: 60px;
-    padding-top: 20px;
     border-bottom: 1px solid #DDDBDB;
-    margin-left: 240px;;
+    margin-left: 240px;
+    padding-top: 1px;;
 }
 #menu_block nav{ height: 40px;
 
@@ -121,7 +137,8 @@ div#menu_block {
 	}
 #menu_block nav li a{
 	color: #9C9C9E;
-	font-size: 22px
+	font-size: 20px;
+	font-weight: 600;
 }
 #menu_block nav li a:hover{
 	color: #495A9A;
@@ -156,7 +173,7 @@ div#menu_block {
 
 /*====MAIN====*/
 #content{
-	width: 783px;
+	width: 764px;
 	padding: 10px;
 	float: right;
 	min-height: 400px;
@@ -169,8 +186,11 @@ div#menu_block {
 }
 
 /*-----VACANSY-----*/
-.row_vacansy{ margin: 20px auto; width: 90%;
+.row_vacansy{ margin: 20px 10px; width: 47%; float: left; cursor: pointer; padding: 10px;
 
+}
+.row_vacansy:hover{
+	background-color: #F5F5F5;
 }
 .row_vacansy a{
 	color: #495A9A;
@@ -178,6 +198,24 @@ div#menu_block {
 .price{
 	font-size: 12px;
 	color: #E10000;
+}
+
+.vacansy_info{
+	width: 100%;
+	border: 1px solid #DDDBDB;
+	padding: 10px;
+	display: none;
+}
+.vacansy_info p{
+	margin: 5px;
+}
+.bottom{
+	margin: 20px;
+}
+a.bottom_resume {
+border: 1px solid;
+padding: 10px;
+margin: 10px;
 }
 
 
@@ -210,7 +248,7 @@ footer#footer{
 }
 
 form fieldset > p{
-	padding: 10px;
+	padding: 5px;
 }
 fieldset {
 	padding: 10px;
@@ -226,4 +264,91 @@ fieldset {
 }
 div.form_field p{
 	float: left;
+}
+
+/*------VACANSY_TABLE-------*/
+.vacansy_table{
+	width: 100%;
+	font-size: 12px;
+	margin: 20px auto;
+}
+
+.vacansy_table thead{
+	background-color: #495A9A;
+	color: #fff;
+}
+.vacansy_table thead tr th { padding: 10px; border-bottom: 1px solid #b2b2b2; }
+.vacansy_table tbody td{
+	padding: 7px;
+	overflow: hidden;
+	height: 50px;
+}
+.vacansy_table tbody tr{
+	
+}
+.vacansy_table tbody tr:nth-child(2n+1){
+	background-color: #DDDBDB;
+}
+
+/*-------*/
+.row_data{
+	font-size: 12px;
+	width: 118px;
+}
+.row_title{
+	width: 150px;
+}
+.row_author{
+	width: 150px;
+}
+.row_cat{
+	width: 155px;
+}
+.row_option{ width: 90px;
+
+}
+.row_option a{
+	float: left;
+	margin-left: 5px;
+}
+
+/*-----CARD_VACANSY-----*/
+.title_blue{
+	color: #495A9A;
+}
+#author_block{
+	border: 2px solid #DDDBDB;
+	background-color: #F5F5F5;
+	border-radius: 5px;
+	padding: 10px;
+}
+.card_option{ width: 100%; height: 40px;
+}
+.card_option li{
+	float: left;
+	padding: 6px;
+	border: 1px solid #495A9A;
+	margin-left: 10px;
+}
+
+/*-----CATEGORY------*/
+.left{
+	float: left;
+	width: 50%;
+}
+.right{
+	float: right;
+	width: 50%;
+}
+.cat_list{
+
+}
+.cat_list li{
+	padding: 10px;
+	border: 1px solid #DDDBDB;
+	margin-bottom: 5px;
+}
+
+.cat_list li:hover{
+	background-color: #DDDBDB;
 }

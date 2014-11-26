@@ -19,7 +19,10 @@ class Vacansy extends Frontend_Controller{
 
 		}
 		
-
+		$this->load->model('page_model');
+		$this->data['page'] = $this->page_model->get_by(array('url' => 'vacansy'), TRUE);
+		//DEbug
+		//$this->output->enable_profiler(TRUE);
 		// Список городов
 		$this->load->model('city_model');
 		$this->data['city'] = $this->city_model->get_by(array('public' => '1'));
@@ -33,8 +36,10 @@ class Vacansy extends Frontend_Controller{
 	public function index()
 	{	//Вакансии
 		
-		$this->data['vacansy'] = $this->vacansy_model->get();
 		
+
+		$this->data['vacansy'] = $this->vacansy_model->get_vacansy();
+		//print_r($this->data['vacansy']);
 		//$this->output->enable_profiler(TRUE);
         $this->display_lib->view_page('vacansy', $this->data);
 		//var_dump($data);
@@ -42,7 +47,7 @@ class Vacansy extends Frontend_Controller{
 
 	public function cat($id_cat)
 	{	
-		$this->data['vacansy'] = $this->vacansy_model->get_by(array('id_cat' => $id_cat));
+		$this->data['vacansy'] = $this->vacansy_model->get_vacansy_by(array('id_cat' => $id_cat));
 
         $this->display_lib->view_page('vacansy', $this->data);
 	}
@@ -55,6 +60,8 @@ class Vacansy extends Frontend_Controller{
 
 		 $this->display_lib->view_page('vacansy', $this->data);
 	}
+
+	
 }
 
 /* End of file page.php */

@@ -20,6 +20,25 @@ jQuery(document).ready(function($) {
 	});
 
 
+
+
+	////////
+	var row_vacansy = $('.row_vacansy');
+
+	row_vacansy.click(function() {
+
+		var id_row = $(this).attr("id");
+		var info_row = "#info_block_"+id_row;
+
+
+		 $(info_row).slideToggle(500);
+
+		console.log(info_row);
+	});
+	
+
+
+
 });
 //
 // Функция вкл\выкл показа выпадающего списка с професиями
@@ -39,5 +58,8 @@ function selectProfession (groups) {
 		$('#prof_select').removeClass('hidden');
 		profession.attr("disabled", false);
 	}
+
+
+
 
 }

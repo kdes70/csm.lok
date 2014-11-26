@@ -5,38 +5,43 @@ class Vacansy_Model extends MY_Model
     protected $_table_name = 'vacansy';
     protected $_primary_key = 'id_vac';
     protected $_primary_filter = 'intval';
-    protected $_order_by = 'id_vac';
+    protected $_order_by = 'id_vac DESC';
     protected $_timestamps = TRUE;
 
  	public $rules = array(
         'city' => array(
             'field' => 'city',
-            'label' => 'city',
-            'rules' => 'required'
-        ),
-        'category' => array(
-            'field' => 'category',
-            'label' => 'category',
+            'label' => 'Город',
             'rules' => 'required|integer|numeric|callback__is_null'
         ),
-        'contact' => array(
-            'field' => 'contact',
-            'label' => 'contact',
+        'id_cat' => array(
+            'field' => 'id_cat',
+            'label' => 'Рубрика',
+            'rules' => 'required|integer|numeric|callback__is_null'
+        ),
+        'id_loc' => array(
+            'field' => 'id_loc',
+            'label' => 'Подразделение/Отдел',
+            'rules' => 'integer|numeric'
+        ),
+        'author' => array(
+            'field' => 'author',
+            'label' => 'Контактное лицо',
             'rules' => 'trim|required|xxs_clean'
         ),
         'email' => array(
             'field' => 'email',
-            'label' => 'email',
+            'label' => 'Email',
             'rules' => 'trim|required|valid_email|xxs_clean'
         ),
         'phone' => array(
-            'field' => 'title',
-            'label' => 'title',
+            'field' => 'phone',
+            'label' => 'Телефон',
             'rules' => 'trim|required|xxs_clean'
         ),
  		'title' => array(
  		    'field' => 'title',
- 		    'label' => 'title',
+ 		    'label' => 'Наименование вакансии',
  		    'rules' => 'trim|required|xxs_clean'
  		),
         'reason' => array(
@@ -110,6 +115,31 @@ class Vacansy_Model extends MY_Model
             'rules' => 'trim'
         )
     );
+    
+    public function get_new ()
+    {
+        $vacansy = new stdClass();
+        $vacansy->city = '';
+        $vacansy->id_cat = '';
+        $vacansy->id_loc = '';
+        $vacansy->author = '';
+        $vacansy->email = '';
+        $vacansy->phone = '';
+        $vacansy->title = '';
+        $vacansy->reason = '';
+        $vacansy->desc_candidate = '';
+        $vacansy->education = '';
+        $vacansy->profes_profession = '';
+        $vacansy->special_requirement = '';
+        $vacansy->other_requirements = '';
+        $vacansy->workplace = '';
+        $vacansy->schedule = '';
+        $vacansy->nature_work = '';
+        $vacansy->wage_rate = '';
+        $vacansy->wage_structure = '';
+        $vacansy->additional_terms = '';
+        return $vacansy;
+    }
 
 	public function save_vacansy($data = array())
 	{
@@ -130,22 +160,43 @@ class Vacansy_Model extends MY_Model
             ->count_all_results($this->_table_name);
     }
 
+    public function get_vacansy_by($where, $single = FALSE)
+    {
+        $this->db->where($where);
+        return $this->get_vacansy($single);
+    }
 
-
-	public function get_vacansy()
+	public function get_vacansy($id = NULL, $single = FALSE)
 	{	
+        if($id != NULL)
+        {
+            $filter = $this->_primary_filter;
+            $id = $filter($id);
+            $this->db->where($this->_primary_key, $id);
+            $method = 'row';
+        }
+        if ($single == TRUE)
+        {
+            $method = 'row';
+        }
+        else{
+            $method = 'result';
+        }
 
-		$fields = $this->_table_name.".* , localis.name AS `local`, CONCAT_WS( ' ',users.name,users.surname,users.patronymic )  AS `fio` ";
+		$fields = $this->_table_name.".* , category.name AS `cat`, city.name AS `cityname` ";
 
 		$this->db->select($fields);
 		$this->db->from($this->_table_name);
-		$this->db->join('localis', 'localis.id_local = '.$this->_table_name.'.id_loc');
-		$this->db->join('users', 'users.id_user = '.$this->_table_name.'.id_author');
-		return $this->db->get()->result();
+		$this->db->join('category', 'category.id = '.$this->_table_name.'.id_cat');
+		$this->db->join('city', 'city.id_city = '.$this->_table_name.'.city');
+        $this->db->order_by($this->_order_by); 
+		return $this->db->get()->$method();
 
 		
 		//var_dump($query);
 
 	}
+
+    
 
 }

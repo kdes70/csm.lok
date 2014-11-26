@@ -6,7 +6,7 @@
        <nav>
             <ul>
                 <li><a href="">Главная цсм</a></li>
-                <li><a href="">Вакансии</a></li>
+                <li><?php echo anchor('vacansy', 'Вакансии'); ?></li>
                 <li><a href="">Подать резюме</a></li>
            
                 <li class="tel"><img src="<?php echo site_url('images/tel2.png'); ?>" alt=""></li>

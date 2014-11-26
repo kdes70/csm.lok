@@ -3,26 +3,35 @@
 
            <?php echo form_open('admin/vacansy/add_vacansy', 'id="reg_form"'); ?> 
 
-           <div id="reg_form_error" class="alert alert-error"><!-- dinamik-->
+           	<h3 class="message">Заявка на поиск сотрудника</h3>
+		
+		 <div id="form_error" class="alert-error"><!-- dinamik-->
            <?php echo validation_errors(); ?>
            </div>
-
-           	<h3 class="message">Заявка на поиск сотрудника</h3>
-
+           
 <small>Поля, которые нужно заполнить, отмечены красной звездочкой <span class="red">*</span>.</small>
 
 	<fieldset>
 		<legend>1. Сведения о вакансии</legend>
 			<p>
 				<label for="city">Город<span class="red">*</span></label><br>
-				<select name="city" id="city">
-					<option >Выбирете город</option>
-					<option >Томск</option>
-					<option >Новосибирск</option>
-				</select>
+
+				<?php if($city): 
+						$option = array();
+
+					foreach($city as $item):
+
+					$option[0] = 'Выберите ваш город';
+					$option[$item->id_city] = $item->name;
+				?>
+
+				<?php endforeach; ?>
+					<?php echo form_dropdown('city', $option, set_value('city'), ' id="city"'); ?> 
+				<?php endif; ?>
+			
 			</p>
 			<p>
-				<label>Подразделение/Отдел</label><br>
+				<label  for="id_loc">Подразделение/Отдел</label><br>
 			<?php if($local): ?>
 				<?php foreach($local as $item): 
 				$option[0] = 'Выберите локализацию';
@@ -30,36 +39,36 @@
 				?>
 
 				<?php endforeach; ?>
-			  <?php echo form_dropdown('local', $option, '', ' id="local"'); ?> 
+			  <?php echo form_dropdown('id_loc', $option, set_value('id_loc'), ' id="id_loc"'); ?> 
 			<?php endif; ?>
 			</p>
 			<p>
-				<label for="category">Рубрика<span class="red">*</span></label><br>
+				<label for="id_cat">Рубрика<span class="red">*</span></label><br>
 				<?php if($category): $option = array();?>
 					<?php foreach($category as $item): 
 					$option[] = 'Выберите рубрику';
 		          	$option[$item->id] = $item->name;
 					?>
 				<?php endforeach; ?>
-			  <?php echo form_dropdown('category', $option, '', ' id="category"'); ?> 
+			  <?php echo form_dropdown('id_cat', $option, set_value('id_cat'), ' id="id_cat"'); ?> 
 			<?php endif; ?>
 			</p>
 	</fieldset>
 	<fieldset>
 		<legend>Контактное лицо по вакансии</legend>
 			<p>
-				<label for="contact">Контактное лицо(ФИО)<span class="red">*</span><br>
-				<?php echo form_input('contact', '', 'id="contact" maxlength="100"'); ?>
+				<label for="author">Контактное лицо(ФИО)<span class="red">*</span><br>
+				<?php echo form_input('author', set_value('author'), 'id="author" maxlength="100"'); ?>
 				</label>
 			</p>
 			<p>
 	 			<label for="phone">Контактный телефон <span class="red">*</span><br>
-	 			<?php echo form_input('phone', '', 'id="phone" maxlength="30"'); ?>
+	 			<?php echo form_input('phone', set_value('phone'), 'id="phone" maxlength="30"'); ?>
 	 			</label>
 	 		</p>
       		<p>
        			<label for="email">Email <span class="red">*</span><br>
-       			<?php echo form_input('email', '', 'id="email" maxlength="30"'); ?>
+       			<?php echo form_input('email', set_value('email'), 'id="email" maxlength="30"'); ?>
        			</label>
        		</p>
            
@@ -74,7 +83,7 @@
 			<p>
 				 <label for="reason">Причина открытия вакансии <br>
 				<select id="reason"  name="reason">
-			      <option >Выберите причину открытия вакансии</option>
+			      <option value="">Выберите причину открытия вакансии</option>
 			      <option >Введение новой штатной единицы</option>
 			      <option >Увольнения сотрудника</option>  
 			      <option >Увольнения сотрудника в течении действия испытательного срока</option>
@@ -107,12 +116,12 @@
 
 <p>
 	<label for="education">Уровень образования/наименования ВУЗа<br>
-	<?php echo form_input('education', '', 'id="education" maxlength="30"'); ?>
+	<?php echo form_input('education', set_value('education'), 'id="education" maxlength="30"'); ?>
 	</label>
 </p>
 <p>
 	<label for="profes_profession">Специальность<br>
-	<?php echo form_input('profes_profession', '', 'id="profes_profession" maxlength="30"'); ?>
+	<?php echo form_input('profes_profession', set_value('profes_profession'), 'id="profes_profession" maxlength="30"'); ?>
 	</label>
 </p>
 
@@ -125,7 +134,7 @@
 </p>
 <p>
 	<label for="other_requirements">Другие требования, на которые хотели бы обратить внимания<br>
-	<?php echo form_input('other_requirements', '', 'id="other_requirements" maxlength="30"'); ?>
+	<?php echo form_input('other_requirements', set_value('other_requirements'), 'id="other_requirements" maxlength="30"'); ?>
 	</label>
 </p>
 </fieldset>
@@ -136,14 +145,14 @@
 
 <p>
 	<label for="workplace">Место работы практика<br>
-	<?php echo form_input('workplace', '', 'id="workplace" maxlength="30"'); ?>
+	<?php echo form_input('workplace', set_value('workplace'), 'id="workplace" maxlength="30"'); ?>
 	</label>
 </p>
 
 <p>
 	 <label for="schedule">График работы<br>
 	<select id="schedule"  name="schedule">
-		<option >выберите график...</option>
+		<option value="">выберите график...</option>
 		<option >полный рабочий день</option>
 		<option >удаленная работа</option>  
 		<option >гибкий график</option> 
@@ -153,7 +162,7 @@
 </p>
 <p>
 	<label for="nature_work">Характер работы<br>
-	<?php echo form_input('nature_work', '', 'id="nature_work" maxlength="30"'); ?>
+	<?php echo form_input('nature_work', set_value('nature_work'), 'id="nature_work" maxlength="30"'); ?>
 	</label>
 </p>
 
@@ -170,7 +179,7 @@
 </p>
 <p>
 	<label for="wage_rate">Размер заработной платы<br>
-	<?php echo form_input('wage_rate', '', 'id="wage_rate" maxlength="30"'); ?>
+	<?php echo form_input('wage_rate', set_value('wage_rate'), 'id="wage_rate" maxlength="30"'); ?>
 	</label>
 </p>
 <p>
@@ -184,6 +193,7 @@
            		<p>
            			<?php echo form_submit('submit', 'Отправить', 'id="button"'); ?>
            		</p>
+	<?php echo form_close();?>
   
 </div>
  <div class="clear"></div>

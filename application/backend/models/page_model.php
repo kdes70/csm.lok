@@ -6,7 +6,16 @@ class Page_Model extends MY_Model
     protected $_primary_key = 'url';
     protected $_primary_filter = 'strval';
     protected $_order_by = 'id_page';
-    protected $_rules = array();
+    
     protected $_timestamps = FALSE;
+
+    public $rules = array(
+		
+		'text' => array(
+			'field' => 'text', 
+			'label' => 'Текст', 
+			'rules' => 'trim|required'
+		)
+	);
 
 }

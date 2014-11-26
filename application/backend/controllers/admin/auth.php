@@ -65,7 +65,7 @@ class Auth extends Admin_Controller{
 	public function login()
 	{
 		// шаблон для админ панели
-		$dashboard = 'admin/dashboard';
+		$dashboard = 'admin/vacansy';
 		// Если залогинен напровляем на админ панель
 		$this->admin_model->loggedin() == FALSE || redirect($dashboard);
 		// Получаем правила для валидации

@@ -9,55 +9,117 @@ class Vacansy extends Admin_Controller{
 		$this->load->model('vacansy_model');
 		$this->load->helper('csm_helper');
 
+		//Категории
+		$this->load->model('category_model');
+		$this->data['category'] = $this->category_model->get();
+
+		foreach ($this->data['category'] as $key =>$value) 
+		{
+
+			$this->data['category'][$key] = $value;
+			$this->data['category'][$key]->count = $this->vacansy_model->count_vacansy_by_category($value->id);
+
+		}
+
+		$this->load->model('city_model');
+		$this->data['city'] = $this->city_model->get();
 		//DEbug
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 	}
 
 	public function index()
-	{
-		//Список вакансий
-		$this->data['vacansy'] = $this->vacansy_model->get_vacansy();
+	{		
 		
-		//var_dump($this->data['vacansy']);
-		$view = 'admin/_layout_show';
-		//$this->data['subview'] = 'admin/admin/vacansy/vacansy';
+
+		$this->data['vacansy'] = $this->vacansy_model->get_vacansy();
+
+		$view = 'admin/vacansy_table';
+	
 		$this->display_lib->view_admin_page($view, $this->data);
 	}
 
-	public function read()
-	{	
-
-		$this->data['vacansy'] = $this->vacansy_model->get();
-
-		$view = 'admin/vacansy_table';
-		//$this->data['subview'] = 'admin/admin/vacansy/vacansy_read';
-		$this->display_lib->view_admin_page($view, $this->data);
+	public function delete($id)
+	{
+		$this->vacansy_model->delete($id);
+		redirect('admin/vacansy/read');
 	}
 
 	
-	public function public_view($id_vac)
+	public function card_vacansy($id_vac)
+	{
+		$this->data['vacansy'] = $this->vacansy_model->get_vacansy($id_vac, TRUE);
+
+		$view = 'admin/card_vacansy';
+		
+		$this->display_lib->view_admin_page($view, $this->data);
+	}
+	
+	public function public_set($id_vac)
 	{
 		$id = $this->vacansy_model->save(array('public' => '1'), $id_vac);
 
-		if($id)
-		{
 			redirect('admin/vacansy');
+		
+	}
+
+	public function edit ($id = NULL)
+	{	
+		
+		// Fetch a article or set a new one
+		if ($id) {
+			$this->data['vacansy'] = $this->vacansy_model->get($id);
+			count($this->data['vacansy']) || $this->data['errors'][] = 'article could not be found';
+		}
+		/*else {
+			$this->data['vacansy'] = $this->vacansy_model->get_new();
+		}*/
+		
+		// Set up the form
+		$rules = $this->vacansy_model->rules;
+		$this->form_validation->set_rules($rules);
+		
+		// Process the form
+		if ($this->form_validation->run() == TRUE) {
+			$data = $this->vacansy_model->array_from_post(array(
+				'city',
+				'id_cat',
+				'id_loc',
+				'author',
+				'email',
+				'phone',
+				'title',
+				'reason',
+				'desc_candidate',
+				'education',
+				'profes_profession',
+				'special_requirement',
+				'other_requirements',
+				'workplace',
+				'schedule',
+				'nature_work',
+				'wage_rate',
+				'wage_structure',
+				'additional_terms'
+			));
+			
+			$this->vacansy_model->save($data, $id);
+			redirect('admin/vacansy/read');
 		}
 
+		//список локолизации
+		$this->load->model('localis_model');
+		$this->data['local'] = $this->localis_model->get();
+
+		// Load the view
+		$view = 'admin/edit_vacansy';
+		//$this->data['subview'] = 'admin/admin/vacansy/form_vacansy';
+		$this->display_lib->view_admin_page($view, $this->data);
 	}
 
 	public function add_vacansy()
 	{
 
 		$email_moder = 'hr@mail.ru';
-
-		//список локолизации
-		$this->load->model('localis_model');
-		$this->data['local'] = $this->localis_model->get();
-
-		//Категории
-		$this->load->model('category_model');
-		$this->data['category'] = $this->category_model->get();
 
 		//список должностей
 		// $this->load->model('profession_model');
@@ -70,10 +132,10 @@ class Vacansy extends Admin_Controller{
 		{
 			// Сведенья о вакансии
 			$city = $this->input->post('city');
-			$local = $this->input->post('id_local');
-			$category = $this->input->post('category');
+			$local = $this->input->post('id_loc');
+			$category = $this->input->post('id_cat');
 			// Контактные данные
-			$contact = $this->input->post('contact');
+			$contact = $this->input->post('author');
 			$phone = $this->input->post('phone');
 			$email = $this->input->post('email');
 			// Описание вокансии
@@ -134,7 +196,7 @@ class Vacansy extends Admin_Controller{
 				                       
 				if ( $this->email->send() )
 				{
-				    redirect('admin/vacansy/read');
+				    redirect('admin/vacansy');
 				    return TRUE;
 				}
 				else
@@ -146,7 +208,10 @@ class Vacansy extends Admin_Controller{
 			}
 			
 		}
-		
+		//список локолизации
+		$this->load->model('localis_model');
+		$this->data['local'] = $this->localis_model->get();
+
 		$view = 'admin/form_vacansy';
 		//$this->data['subview'] = 'admin/admin/vacansy/form_vacansy';
 		$this->display_lib->view_admin_page($view, $this->data);
@@ -158,7 +223,7 @@ class Vacansy extends Admin_Controller{
 
         if ((int)$var === 0 )
         {
-            $this->form_validation->set_message('_is_null', '%s обязательно для заполнения');
+            $this->form_validation->set_message('_is_null', 'Поле "%s" обязательно для заполнения');
             return FALSE;
         }
        return TRUE; 
