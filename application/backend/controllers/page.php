@@ -7,7 +7,32 @@ class Page extends Frontend_Controller{
 		parent::__construct();
 		//Модель page
 		$this->load->model('page_model');
+		//Модель вакансии
+		$this->load->model('vacansy_model');
 
+		$this->load->helper('csm_helper');
+		//Категории
+		$this->load->model('category_model');
+		$this->data['category'] = $this->category_model->get();
+
+		$this->load->model('resume_model');
+		$this->data['new_resume'] = $this->resume_model->get_count_by(array('read'=>'0', 'public'=>'1'));
+
+		foreach ($this->data['category'] as $key =>$value) 
+		{
+
+			$this->data['category'][$key] = $value;
+			$this->data['category'][$key]->count = $this->vacansy_model->count_vacansy_by_category($value->id);
+
+		}
+		
+		//$this->load->model('page_model');
+		//$this->data['page'] = $this->page_model->get_by(array('url' => 'vacansy'), TRUE);
+		//DEbug
+		//$this->output->enable_profiler(TRUE);
+		// Список городов
+		$this->load->model('city_model');
+		$this->data['city'] = $this->city_model->get_by(array('public' => '1'));
 	}
 
 /**
@@ -17,9 +42,9 @@ class Page extends Frontend_Controller{
 	public function index()
 	{	
 		
-		$data['page_manu'] = $this->page_model->get_by(array('section' => 'top'));
+		//$data['page_manu'] = $this->page_model->get_by(array('section' => 'top'));
 
-		var_dump($data);
+		//var_dump($data);
 	}
 /**
  * [show description]
@@ -30,60 +55,20 @@ class Page extends Frontend_Controller{
 	{
 		$data = array();
 
-		$data['page_info'] = $this->page_model->get($id_page);
+		$this->data['page_info'] = $this->page_model->get($id_page);
 
 		switch ($id_page) {
 
-			case 'main':
-
-				$view = 'main/main';
-				//Подключаем виды для гланой страницы
-				$this->display_lib->view_page($view, $data);
-
-				$this->output->enable_profiler(TRUE);
-				break;
-			case 'tests':
-
-				$this->load->model('user_model');
-
-			  	if($this->user_model->loggedin() == FALSE)
-		        {
-		           redirect('page/show/main');
-		        } 
-
-				$view = 'tests/show';
-
-				$this->display_lib->user_login($view, $data);
-			break;
-
-			case 'news':
-				//Подключаем виды для страницы новостей 
+			
+			case 'info':
+				//Подключаем виды для страницы информации
+				$this->data['subview'] = 'page/post_row';
+				$this->display_lib->view_page('page/info', $this->data);
 				break;
 			case 'registration':
 			
 				break;
-			case 'vacansy':
-
-
-			$this->load->model('localis_model');
-			$data['local'] = $this->localis_model->get();
-
-			$this->load->model('vacansy_model');
-			$data['vac'] = $this->vacansy_model->get_by(array('public' => '1'));
-
 			
-			$view = 'vacansy/vacansy';
-			$this->display_lib->view_page($view, $data);
-				break;
-			
-			// case 'profiles':
-
-
-
-
-			// 	$view = 'user/profiles';
-			// 	$this->display_lib->user_login($view, $data);
-			// 	break;
 			default:
 				// Значения по умолчанию
 				break;

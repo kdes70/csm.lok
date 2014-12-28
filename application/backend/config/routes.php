@@ -44,7 +44,7 @@ $route['404_override'] = '';
 //$route['(.*)/admin/auth/index/(.*)']  = 'admin/auth/index/$1';
 //$route['(.*)'] = 'auth/index/$1';
 
-//$route['page/show'] = 'page/show/main';
+//$route['page/show/:any'] = 'page/$1';
 
  // $route['default_controller'] = "page";
  //    $route['404_override'] = 'page';

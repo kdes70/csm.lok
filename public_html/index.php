@@ -20,6 +20,7 @@ date_default_timezone_set('Europe/Moscow');
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
+//echo dirname(__FILE__);
 	switch (dirname(__FILE__)) {
 		case 'D:\OpenServer\domains\csm.lok\public_html':
 			define('ENVIRONMENT', 'development');
@@ -50,6 +51,7 @@ if (defined('ENVIRONMENT'))
 		case 'testing':
 		case 'production':
 			error_reporting(0);
+			
 		break;
 
 		default:

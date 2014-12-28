@@ -10,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--	<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />-->
 <link type="text/css" rel="stylesheet" href="<?php echo site_url('css/style.css'); ?>" media="all" />
-<link rel="stylesheet" href="<?php echo site_url('css/font-awesome/css/font-awesome.css'); ?>" >
+<!-- <link rel="stylesheet" href="<?php // echo site_url('css/font-awesome/css/font-awesome.css'); ?>" > -->
 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
 
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> -->
 <script type="text/javascript" src="<?php echo site_url('js/jquery-1.11.0.min.js'); ?>"></script>
 
 <script type="text/javascript" src="<?php echo site_url('ckeditor/ckeditor.js'); ?>"></script>

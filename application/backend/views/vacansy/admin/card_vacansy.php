@@ -8,7 +8,7 @@
     </ul>
 </div>
 
-    <h3 class="title_blue">Картачка вакансии</h3>
+    <h3 class="title_blue">Карточка вакансии</h3>
    <div>
        <h4>Наименование вакансии: <?php echo $vacansy->title; ?></h4>
        <p class="title_blue">Отзывы по вакансии <span>10</span></p>

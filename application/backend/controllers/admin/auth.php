@@ -15,7 +15,7 @@ class Auth extends Admin_Controller{
 
 	//	print_r($this->admin_model->hash($this->input->post('password')));
 		//DEbug
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 	}
 
 	public function index()

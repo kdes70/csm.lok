@@ -10,6 +10,10 @@ $this->load->helper('csm_helper');
 		$this->load->model('category_model');
 		$this->data['category'] = $this->category_model->get();
 
+		$this->load->model('resume_model');
+$this->data['new_resume'] = $this->resume_model->get_count_by(array('read'=>'0', 'public'=>'1'));
+
+
 		$this->load->model('vacansy_model');
 		foreach ($this->data['category'] as $key =>$value) 
 		{
@@ -20,7 +24,7 @@ $this->load->helper('csm_helper');
 		}
 
 		//DEbug
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 	}
 
 	public function index()

@@ -19,6 +19,11 @@ class Vacansy_Model extends MY_Model
             'label' => 'Рубрика',
             'rules' => 'required|integer|numeric|callback__is_null'
         ),
+        'id_type' => array(
+            'field' => 'id_type',
+            'label' => 'Тип вакансии',
+            'rules' => 'required|integer|numeric'
+        ),
         'id_loc' => array(
             'field' => 'id_loc',
             'label' => 'Подразделение/Отдел',
@@ -113,6 +118,11 @@ class Vacansy_Model extends MY_Model
             'field' => 'additional_terms',
             'label' => 'additional_terms',
             'rules' => 'trim'
+        ),
+         'priority' => array(
+            'field' => 'priority',
+            'label' => 'Приоритет',
+            'rules' => ''
         )
     );
     
@@ -122,6 +132,7 @@ class Vacansy_Model extends MY_Model
         $vacansy->city = '';
         $vacansy->id_cat = '';
         $vacansy->id_loc = '';
+        $vacansy->id_type = '';
         $vacansy->author = '';
         $vacansy->email = '';
         $vacansy->phone = '';
@@ -160,13 +171,23 @@ class Vacansy_Model extends MY_Model
             ->count_all_results($this->_table_name);
     }
 
-    public function get_vacansy_by($where, $single = FALSE)
+    public function count_all($where)
     {
-        $this->db->where($where);
-        return $this->get_vacansy($single);
+        return  $this->db
+                ->where($where)
+                //->from($this->_table_name)
+               // ->join('category', 'category.id = '.$this->_table_name.'.id_cat')
+               // ->join('city', 'city.id_city = '.$this->_table_name.'.city')
+                ->count_all_results($this->_table_name);
     }
 
-	public function get_vacansy($id = NULL, $single = FALSE)
+    public function get_vacansy_by($where, $limit = NULL, $single = FALSE)
+    {
+        $this->db->where($where);
+        return $this->get_vacansy(NULL, $limit, $single);
+    }
+
+	public function get_vacansy($id = NULL, $limit = NULL, $single = FALSE)
 	{	
         if($id != NULL)
         {
@@ -182,6 +203,8 @@ class Vacansy_Model extends MY_Model
         else{
             $method = 'result';
         }
+       
+
 
 		$fields = $this->_table_name.".* , category.name AS `cat`, city.name AS `cityname` ";
 
@@ -190,6 +213,11 @@ class Vacansy_Model extends MY_Model
 		$this->db->join('category', 'category.id = '.$this->_table_name.'.id_cat');
 		$this->db->join('city', 'city.id_city = '.$this->_table_name.'.city');
         $this->db->order_by($this->_order_by); 
+        if($limit != NULL)
+        {
+            $this->db->limit($limit);
+        }
+
 		return $this->db->get()->$method();
 
 		

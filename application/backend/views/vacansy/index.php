@@ -82,7 +82,6 @@
     </div>
 </section><!-- /content -->
 	
-
 </div>
 <footer id="footer">
 	<div id="copyrights"> &#169; ЦСМ - <?php echo date('Y'); ?>&nbsp;|&nbsp;<a href="http://0370.ru/" target="_blank">ООО ЦСМ</a>
@@ -94,5 +93,6 @@
     </div>
 
 </footer>
+
 </body>
 </html>

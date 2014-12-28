@@ -53,6 +53,34 @@
 			  <?php echo form_dropdown('id_cat', $option, set_value('id_cat', $vacansy->id_cat), ' id="id_cat"'); ?> 
 			<?php endif; ?>
 			</p>
+			<p>
+				 <label for="reason">Причина открытия вакансии <br>
+				<select id="reason"  name="reason">
+			      <option value="">Выберите причину открытия вакансии</option>
+			      <option >Введение новой штатной единицы</option>
+			      <option >Увольнения сотрудника</option>  
+			      <option >Увольнения сотрудника в течении действия испытательного срока</option>
+			    </select>
+				</label>
+			</p>
+			<p><!--  TYPE -->
+                <label for="id_type">Тип вакансии<span class="red">*</span><br>
+                <small>(При отклике на вакансию соискатель заполнит анкету того или иного типа)</small>
+                </label><br>
+                	<?php 
+                	$option = array(
+                		'1' =>' Медицинский персонал',
+                		'2' => 'Не медицинский персонал');
+					?>
+                	<?php echo form_dropdown('id_type', $option, set_value('id_type', $vacansy->id_type), ' id="id_type"'); ?> 
+                   
+            </p><!--  TYPE -->
+             <p>
+					<label for="priority">Приоритет обычный</label><br>
+					<?php echo form_radio('priority','0', returnCheck($vacansy->priority, 0)); ?><br>
+					<label for="priority">Приоритет важный</label><br>
+					<?php echo form_radio('priority', '1', returnCheck($vacansy->priority, 1)); ?>
+           </p>
 	</fieldset>
 	<fieldset>
 		<legend>Контактное лицо по вакансии</legend>
@@ -80,16 +108,7 @@
 				<?php echo form_input('title', set_value('title', $vacansy->title), 'id="title" maxlength="30"'); ?>
 				</label>
 			</p>
-			<p>
-				 <label for="reason">Причина открытия вакансии <br>
-				<select id="reason"  name="reason">
-			      <option value="">Выберите причину открытия вакансии</option>
-			      <option >Введение новой штатной единицы</option>
-			      <option >Увольнения сотрудника</option>  
-			      <option >Увольнения сотрудника в течении действия испытательного срока</option>
-			    </select>
-				</label>
-			</p>
+			
 <!-- <p>
 	<label for="count_candidate">Количество сотрудников которое требуется<br>
 		<input type="number" name="count_candidate" id="count_candidate" value="<?php echo set_value('count_candidate'); ?>" placeholder="">

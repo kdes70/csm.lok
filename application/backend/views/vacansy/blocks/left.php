@@ -8,6 +8,16 @@
             <p><?php echo anchor('admin/pages', 'Главная страница'); ?></p>
             <p><?php echo anchor('admin/vacansy', 'Вакансии'); ?></p>
             <p><?php echo anchor('admin/category/edit', 'Рубрики'); ?></p>
+
+            <!--  <p><?php echo anchor('admin/callback', 'Заявки на звонок'); ?></p> -->
+
+            <p><?php echo anchor('admin/resume', 'Резюме ') ?> 
+            <?php if($new_resume): ?>
+<a class="no_line" href="<?php echo base_url('admin/resume/new_resume'); ?>"><span class="info_count">+<?php echo $new_resume ?></span></a>
+             <?php endif; ?>
+            </p>  
+           
+            
             <p><?php echo anchor('admin/auth/logout', 'Выйти') ?></p>
         </div>
     <?php endif; ?>

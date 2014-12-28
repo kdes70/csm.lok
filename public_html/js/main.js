@@ -38,6 +38,61 @@ jQuery(document).ready(function($) {
 	
 
 
+/*
+
+	$('a#go').click( function(event){ // ловим клик по ссылки с id="go"
+		event.preventDefault(); // выключаем стандартную роль элемента
+
+		var id_form = $(this).attr('href').substring(1); // Получаем id вакансии
+			
+		$.ajax({
+			url: 'resume/add_resume',
+			type: 'POST',
+			dataType: 'json',
+			data: {id_type: id_form},
+			
+		})
+		.done(function(form_view) {
+			console.log("success");
+
+			var res = JSON.parse(form_view);
+			console.log(res.id_type);
+			alert(res.id_type);
+
+		})
+		.fail(function() {
+
+			console.log("error");
+
+		})
+		.always(function() {
+			console.log("complete");
+			$('.ajax_loader').show(400);
+		});
+		
+
+
+		console.log(id_form);
+
+		$('#overlay').fadeIn(400, // сначала плавно показываем темную подложку
+		 	function(){ // после выполнения предъидущей анимации
+				$('#modal_form') 
+					.css('display', 'block') // убираем у модального окна display: none;
+					.animate({opacity: 1, top: '40%'}, 200); // плавно прибавляем прозрачность одновременно со съезжанием вниз
+		});
+	});*/
+	/* Закрытие модального окна, тут делаем то же самое но в обратном порядке */
+	/*$('#modal_close, #overlay').click( function(){ // ловим клик по крестику или подложке
+		$('#modal_form')
+			.animate({opacity: 0, top: '45%'}, 200,  // плавно меняем прозрачность на 0 и одновременно двигаем окно вверх
+				function(){ // после анимации
+					$(this).css('display', 'none'); // делаем ему display: none;
+					$('#overlay').fadeOut(400); // скрываем подложку
+				}
+			);
+	});
+*/
+
 
 });
 //
@@ -58,6 +113,7 @@ function selectProfession (groups) {
 		$('#prof_select').removeClass('hidden');
 		profession.attr("disabled", false);
 	}
+
 
 
 

@@ -10,16 +10,16 @@ table { border-collapse: collapse; border-spacing: 0 }
 /* = Ссылки */
 a { text-decoration: none;}
 
-p{line-height: 1.5;}
+p{ line-height: 1.5;}
 
 /* = Убираем рамку для изображений */
-img { border: none; max-width: 100%; height: auto; }
+img { border: none; max-width: 100%; height: auto; vertical-align: middle;}
 
 article, aside, figure, footer, header, hgroup, nav, section {display: block;}
 
 hr{ margin: 10px auto;
 }
-label{vertical-align: middle;}
+label{ vertical-align: middle;}
 
 *{
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
@@ -50,7 +50,6 @@ body{
 	color: #3E4156;
 	text-align: center;
 	line-height: normal;
-	background-color: #DDDBDB !important;
 }
 
 /* = Убираем обводку при клике на элементы форм и др. */
@@ -78,7 +77,13 @@ display: none;
 .tel{
 	width: 175px !important;
 	height: 45px;
-	margin-left: 20px;
+	float: left;
+	margin-left: 126px;
+	margin-top: 21px;
+/* margin-left: 135px; */
+/*position: absolute;
+left: 794px;
+top: 50px;*/
 }
 
 .alert-error{ color: #E12004; font-size: 14px;
@@ -101,13 +106,14 @@ display: none;
 	background-color: #fff;
 	padding: 10px;
 	min-height: 700px;
-	/*border: 1px solid #dddbdb;*/
+	outline: 1px solid #dddbdb;
 }
 /*----HEADER----*/
 header#header{
 	width: 100%;
-	height: 60px;
-	margin-bottom: 30px;
+	height: 130px;
+	background-image: url('../images/header.jpg');
+	margin-bottom: 10px;
 }
 #logo_block{ 
 	float: left; 
@@ -118,9 +124,8 @@ header#header{
 div#menu_block {
 	width: 782px;
     height: 60px;
-    border-bottom: 1px solid #DDDBDB;
-    margin-left: 240px;
-    padding-top: 1px;;
+    padding-top: 70px;
+   /*  border-bottom: 1px solid #DDDBDB; */;
 }
 #menu_block nav{ height: 40px;
 
@@ -128,7 +133,7 @@ div#menu_block {
 #menu_block nav li{
 	text-align: center;
 	line-height: 43px;
-	width: 24%;
+	width: 23%;
 	float: left;
 	
 }
@@ -167,8 +172,7 @@ div#menu_block {
 .left_section{
 	margin-bottom: 20px;
 }
-.left_section p{
-	margin-bottom: 10px;
+.left_section p{ margin-bottom: 10px;
 }
 
 /*====MAIN====*/
@@ -186,9 +190,38 @@ div#menu_block {
 }
 
 /*-----VACANSY-----*/
-.row_vacansy{ margin: 20px 10px; width: 47%; float: left; cursor: pointer; padding: 10px;
+#vacansy_top_block{
+	border: 1px dashed red;
+	border-radius: 10px;
+	padding: 10px;
+	margin: 30px auto;
+}
+.vacansy_top{
+	border-radius: 10px;
+}
+#cat_main_block{
+	margin-top: 30px;
+}
+#cat_main_block p{
+	float: left;
+	width: 48.5%;
+	margin: 5px;
+}
+#cat_main_block a{
+	font-size: 20px;
+}
+.date_create{
+	color: #b2b2b2;
+	font-size: 12px;
+}
+.row_vacansy{ margin: 10px 5px; width: 48.5%; float: left; cursor: pointer; padding: 10px;
 
 }
+.row_vacansy:hover{
+	-webkit-box-shadow: 1px 1px 2px 2px #BDBDBD;
+	box-shadow: 1px 1px 2px 2px #BDBDBD;
+}
+
 .row_vacansy:hover{
 	background-color: #F5F5F5;
 }
@@ -205,9 +238,18 @@ div#menu_block {
 	border: 1px solid #DDDBDB;
 	padding: 10px;
 	display: none;
+	text-align: left;
 }
 .vacansy_info p{
 	margin: 5px;
+	font-size: 13px
+}
+.vacansy_info span{
+	font-weight: 600;
+	color: #777777;
+}
+.vacansy_info h4{
+	color: #495A9A;
 }
 .bottom{
 	margin: 20px;
@@ -217,8 +259,17 @@ border: 1px solid;
 padding: 10px;
 margin: 10px;
 }
+.add_resum{
+	margin: 20px auto;
+	text-align: center;
+}
+.add_resum img{
+	margin-right: 5px;
+}
 
 
+
+/*--------FOOTER--------*/
 footer#footer{
 	width: 100%;
 	height: 40px;
@@ -227,6 +278,9 @@ footer#footer{
 	position: relative;
 	background: #DDDBDB;
 }
+
+
+
 #auth{
 	width: 16px;
 	float: right;
@@ -351,4 +405,198 @@ div.form_field p{
 
 .cat_list li:hover{
 	background-color: #DDDBDB;
+}
+/*----CALLBACK-----*/
+#call{ 
+	float: left;
+	padding: 15px;
+
+}
+#call img{
+	width: 180px;
+}
+#call a{
+	color: red;
+	font-size: 20px;
+}
+
+.info_count{
+	padding: 5px;
+	background: #5672DD;
+	color: #fff;
+	border-radius: 5px;
+	 
+}
+.info_count:hover{
+	background: #748CE5;
+	text-decoration: none;
+}
+
+a.no_line:hover{
+	text-decoration: none;
+}
+/*-------MODEL-WINDOWS-------*/
+.ajax_loader{
+	display: none;
+}
+#modal_form {
+	width: 650px; 
+	min-height: 300px; /* Размеры должны быть фиксированы */
+	border-radius: 10px;
+	border: 3px #9B9A9A solid;
+	background: #fff;
+	position: absolute; /* чтобы окно было в видимой зоне в любом месте */
+	top: 30%; /* отступаем сверху 45%, остальные 5% подвинет скрипт */
+	left: 38%; /* половина экрана слева */
+	margin-top: -150px;
+	margin-left: -150px; /* тут вся магия центровки css, отступаем влево и вверх минус половину ширины и высоты соответственно =) */
+	display: none; /* в обычном состоянии окна не должно быть */
+	opacity: 0; /* полностью прозрачно для анимирования */
+	z-index: 5; /* окно должно быть наиболее большем слое */
+	padding: 20px 10px;
+}
+/* Кнопка закрыть для тех кто в танке) */
+#modal_form #modal_close {
+	width: 21px;
+	height: 21px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+	display: block;
+}
+/* Подложка */
+#overlay {
+	z-index: 3; /* подложка должна быть выше слоев элементов сайта, но ниже слоя модального окна */
+	position: fixed; /* всегда перекрывает весь сайт */
+	background-color: #000; /* черная */
+	opacity: 0.8; /* но немного прозрачна */
+	width: 100%; 
+	height: 100%; /* размером во весь экран */
+	top: 0; 
+	left: 0; /* сверху и слева 0, обязательные свойства! */
+	cursor: pointer;
+	display: none; /* в обычном состоянии её нет) */
+}
+
+/**------FORMS------**/
+form p{ 
+	margin: 10px;
+
+}
+
+input[type=text], input[type=password]{
+	width: 200px;
+	height: 30px;
+	padding: 3px;
+	font-size: 16px;
+	color: #333;
+}
+select {
+	height: 30px;
+	padding: 3px;
+	font-size: 16px;
+	color: #333;
+}
+
+textarea{
+	padding: 5px;
+	font-size: 16px;
+	color: #333;
+}
+#button {
+	background: #495A9A;
+	border: 1px solid #2C4193;
+	padding: 7px;
+	color: #fff;
+}
+
+#button:active{
+	background: #1E3794;
+}
+
+/* Всплывающее окно */	
+#parent_popup {
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#parent_popup a{
+	text-decoration: none;
+}
+a#close_bottom :hover{
+	color: #fff;
+}
+#popup { 
+  	background: #fff;
+    max-width: 520px;
+    width: 100%;
+    margin: 10% auto;
+	padding: 5px 10px 13px 10px;
+	border: 10px solid #ddd;
+	position: relative;
+	/*--CSS3 CSS3 Тени для Блока--*/
+	-webkit-box-shadow: 0px 0px 20px #000;
+	-moz-box-shadow: 0px 0px 20px #000;
+	box-shadow: 0px 0px 20px #000;
+	/*--CSS3 Закругленные углы--*/
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	/*background-image: url('../images/zvonok.jpg');
+	background-repeat: no-repeat;*/
+}
+#popup h1{
+    font:28px Monotype Corsiva, Arial;
+    font-weight: bold;
+	text-align: center;
+	color: #004F80;
+	text-shadow: 0 1px 3px rgba(0,0,0,.3);
+	}
+#popup h2{
+    font:24px Monotype Corsiva, Arial;      
+	color: #008000;
+	text-align: center;
+	text-shadow: 0 1px 3px rgba(0,0,0,.3);
+	}
+#popup img{
+	width: 200px;
+	float: left;
+}
+img#call_bottom{
+	width: 120px;
+	margin-left: 83px;
+}
+/* кнопка закрытия */
+.close_bottom {
+	border: 2px solid #ccc;
+    height: 24px;
+    position: absolute;
+    right: -24px;
+	cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+	-moz-box-shadow: 1px 1px 3px #000;
+	-webkit-box-shadow: 1px 1px 3px #000;
+	line-height: 24px;
+	color: rgba(255, 255, 255, 0.9);
+	font-family: helvetica, arial;
+	text-shadow: 0 -1px rgba(0, 0, 0, 0.9);
+	top: -24px;
+	width: 24px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+	box-shadow: 1px 1px 3px #000;
+}
+.close_bottom:hover {
+    background-color: rgba(255, 69, 0, 0.8);
 }

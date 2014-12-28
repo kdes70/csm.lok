@@ -68,6 +68,21 @@ class MY_Model extends CI_Model
         return $this->get(NULL, $single);
     }
 
+      public function get_count($single = FALSE)
+    {
+          return $this->db->count_all($this->_table_name);
+        
+    }
+
+    public function get_count_by($where)
+    {   
+
+        $this->db->where($where);
+       
+         return $this->db->count_all_results($this->_table_name);
+    }
+
+
     /**
      * [save description]
      * @param  [type] $data [description]

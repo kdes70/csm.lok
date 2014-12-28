@@ -14,7 +14,7 @@ class Page_Model extends MY_Model
 		'text' => array(
 			'field' => 'text', 
 			'label' => 'Текст', 
-			'rules' => 'trim|required'
+			'rules' => 'trim'
 		)
 	);
 

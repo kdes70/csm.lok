@@ -10,7 +10,9 @@ class Pages extends Admin_Controller{
 
 		$this->load->model('vacansy_model');
 		$this->load->helper('csm_helper');
-
+		
+		$this->load->model('resume_model');
+		$this->data['new_resume'] = $this->resume_model->get_count_by(array('read'=>'0', 'public'=>'1'));
 		//Категории
 		$this->load->model('category_model');
 		$this->data['category'] = $this->category_model->get();
@@ -26,7 +28,7 @@ class Pages extends Admin_Controller{
 		$this->load->model('city_model');
 		$this->data['city'] = $this->city_model->get();
 		//DEbug
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 	}
 
 	public function index()

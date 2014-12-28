@@ -124,4 +124,29 @@ if (!function_exists('dump_exit')) {
         exit;
     }
 }
- ?>
+
+
+
+/**
+ * Добовление нулей перед числом
+ * @param  int $digit число
+ * @param  int $width количество нулей
+ * @return int        
+ */
+function numberFormat($digit, $width) {
+    while(strlen($digit) < $width)
+      $digit = '0' . $digit;
+      return $digit;
+}
+
+
+/**
+* Возврат чекбоксов 
+* @param $id integr
+* @param $return integr
+* @return string
+*/ 
+    function returnCheck($id, $return) 
+    { 
+       return ($id == $return) ? 'checked="checked"' : NULL; 
+    }        

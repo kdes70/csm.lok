@@ -7,9 +7,13 @@ class Vacansy extends Frontend_Controller{
 		parent::__construct();
 		
 		$this->load->model('vacansy_model');
+		$this->load->helper('csm_helper');
 		//Категории
 		$this->load->model('category_model');
 		$this->data['category'] = $this->category_model->get();
+
+		$this->load->model('resume_model');
+		$this->data['new_resume'] = $this->resume_model->get_count_by(array('read'=>'0', 'public'=>'1'));
 
 		foreach ($this->data['category'] as $key =>$value) 
 		{
@@ -34,22 +38,40 @@ class Vacansy extends Frontend_Controller{
  * @return [type] [description]
  */
 	public function index()
-	{	//Вакансии
+	{	
+		//Вакансии TOP LIMIT 4
+		$count = 4;
+		$this->data['vacansy'] = $this->vacansy_model->get_vacansy_by(array('vacansy.priority'=>'1', 'vacansy.public'=>'1'), $count);
 		
-		
+		$this->data['count'] = $this->vacansy_model->count_all(array('vacansy.public'=>'1'), NULL, TRUE);
 
-		$this->data['vacansy'] = $this->vacansy_model->get_vacansy();
-		//print_r($this->data['vacansy']);
-		//$this->output->enable_profiler(TRUE);
-        $this->display_lib->view_page('vacansy', $this->data);
-		//var_dump($data);
+        $this->display_lib->view_page('vacansy/vacansy', $this->data);
+		//var_dump($this->data['vacansy']);
+		//
+		
+		
 	}
 
 	public function cat($id_cat)
 	{	
+
+
 		$this->data['vacansy'] = $this->vacansy_model->get_vacansy_by(array('id_cat' => $id_cat));
 
-        $this->display_lib->view_page('vacansy', $this->data);
+		
+
+		//$this->data['form_view'] = 'vacansy/form_anceta_vrach';
+        $this->display_lib->view_page('vacansy/vacansy_cat', $this->data);
+	}
+
+	public function show_view()
+	{
+			
+
+		$data['form_view'] = 'vacansy/form_anceta_vrach';
+		$data['input'] = $this->input->post('id_type');
+			echo json_encode($data);
+
 	}
 
 	public function city($id_city)
@@ -60,6 +82,8 @@ class Vacansy extends Frontend_Controller{
 
 		 $this->display_lib->view_page('vacansy', $this->data);
 	}
+
+	
 
 	
 }

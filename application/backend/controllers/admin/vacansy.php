@@ -9,6 +9,8 @@ class Vacansy extends Admin_Controller{
 		$this->load->model('vacansy_model');
 		$this->load->helper('csm_helper');
 
+		$this->load->model('resume_model');
+		$this->data['new_resume'] = $this->resume_model->get_count_by(array('read'=>'0', 'public'=>'1'));
 		//Категории
 		$this->load->model('category_model');
 		$this->data['category'] = $this->category_model->get();
@@ -41,13 +43,13 @@ class Vacansy extends Admin_Controller{
 	public function delete($id)
 	{
 		$this->vacansy_model->delete($id);
-		redirect('admin/vacansy/read');
+		redirect('admin/vacansy');
 	}
 
 	
 	public function card_vacansy($id_vac)
 	{
-		$this->data['vacansy'] = $this->vacansy_model->get_vacansy($id_vac, TRUE);
+		$this->data['vacansy'] = $this->vacansy_model->get_vacansy($id_vac, NULL, TRUE);
 
 		$view = 'admin/card_vacansy';
 		
@@ -61,6 +63,8 @@ class Vacansy extends Admin_Controller{
 			redirect('admin/vacansy');
 		
 	}
+
+	
 
 	public function edit ($id = NULL)
 	{	
@@ -84,6 +88,7 @@ class Vacansy extends Admin_Controller{
 				'city',
 				'id_cat',
 				'id_loc',
+				'id_type',
 				'author',
 				'email',
 				'phone',
@@ -99,11 +104,12 @@ class Vacansy extends Admin_Controller{
 				'nature_work',
 				'wage_rate',
 				'wage_structure',
-				'additional_terms'
+				'additional_terms',
+				'priority'
 			));
 			
 			$this->vacansy_model->save($data, $id);
-			redirect('admin/vacansy/read');
+			redirect('admin/vacansy');
 		}
 
 		//список локолизации
@@ -118,9 +124,7 @@ class Vacansy extends Admin_Controller{
 
 	public function add_vacansy()
 	{
-
 		$email_moder = 'hr@mail.ru';
-
 		//список должностей
 		// $this->load->model('profession_model');
 		// $this->data['profession'] = $this->profession_model->get();
@@ -134,13 +138,15 @@ class Vacansy extends Admin_Controller{
 			$city = $this->input->post('city');
 			$local = $this->input->post('id_loc');
 			$category = $this->input->post('id_cat');
+			$reason = $this->input->post('reason');
+			$type = $this->input->post('type');
+			$priority = $this->input->post('priority');
 			// Контактные данные
 			$contact = $this->input->post('author');
 			$phone = $this->input->post('phone');
 			$email = $this->input->post('email');
 			// Описание вокансии
 			$title = $this->input->post('title');
-			$reason = $this->input->post('reason');
 			$desc_candidate = $this->input->post('desc_candidate');
 			// Требования
 			$education = $this->input->post('education');
@@ -158,10 +164,11 @@ class Vacansy extends Admin_Controller{
 			$data = array(
 				'id_loc' => $local,
 				'id_cat' => $category,
+				'city' =>$city,
+				'id_type' => $category,
 				'author' => $contact,
 				'email' => $email,
 				'phone' => $phone,
-				'city' =>$city,
 				'title' => $title,
 				'reason' => $reason,
 				'count_candidate' => '',
@@ -177,7 +184,8 @@ class Vacansy extends Admin_Controller{
 				'wage_rate' => $wage_rate,
 				'wage_structure' => $wage_structure,
 				'additional_terms' => $additional_terms,
-				'public' => '0',
+				'public' => '1',
+				'priority' => $priority,
 				 );
 
 			$id_vac = $this->vacansy_model->save_vacansy($data);
@@ -185,27 +193,29 @@ class Vacansy extends Admin_Controller{
 			if($id_vac)
 			{
 
-				$this->load->library('email');
+				// $this->load->library('email');
 
-				$this->email->clear();
-				$this->email->set_newline("\r\n");
-				$this->email->from('admin@mail.ru', 'HR-manager');
-				$this->email->to($email, $email_moder);
-				$this->email->subject('Заявка на вакансию');
-				$this->email->message('Поступила заявка на вакансию  http://csm.lok/admin/vacansy/read/'.$id_vac);
+				// $this->email->clear();
+				// $this->email->set_newline("\r\n");
+				// $this->email->from('admin@mail.ru', 'HR-manager');
+				// $this->email->to($email, $email_moder);
+				// $this->email->subject('Заявка на вакансию');
+				// $this->email->message('Поступила заявка на вакансию  http://csm.lok/admin/vacansy/read/'.$id_vac);
 				                       
-				if ( $this->email->send() )
-				{
-				    redirect('admin/vacansy');
-				    return TRUE;
-				}
-				else
-				{				   
-				    return FALSE;
-				}	
+				// if ( $this->email->send() )
+				// {
+				//     redirect('admin/vacansy');
+				//     return TRUE;
+				// }
+				// else
+				// {				   
+				//     return FALSE;
+				// }	
 
-				redirect('admin/vacansy');
+				redirect('admin/vacansy', 'location');
 			}
+
+			//redirect('admin/vacansy', 'location');
 			
 		}
 		//список локолизации
