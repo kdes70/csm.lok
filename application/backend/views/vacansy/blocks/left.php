@@ -3,6 +3,14 @@
     <div class="title_left">Вакансии</div>
     <div class="left_content">
     <?php if($this->session->userdata('loggedin') == TRUE): ?>
+        <?php if($this->session->userdata('is_admin') == TRUE): ?>
+              <div class="left_section">
+                <h3>Админ-панель</h3>
+                <p><?php echo anchor('admin/user', 'Администраторы'); ?></p>
+                <p><?php echo anchor('admin/page/meta', 'Мета-данные'); ?></p>
+                 <p><?php echo anchor('admin/testing', 'Система тестирования'); ?></p>
+              </div>
+        <?php endif; ?>
         <div class="left_section">
         <h3>Опции</h3>
             <p><?php echo anchor('admin/pages', 'Главная страница'); ?></p>

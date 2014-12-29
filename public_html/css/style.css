@@ -7,6 +7,13 @@ ul, ol { list-style: none }
 /* = Работаем с таблицами: убираем удвоение рамок ячеек и расстояние между ячейками */
 table { border-collapse: collapse; border-spacing: 0 }
 
+input:focus,
+select:focus{
+	border: 1px solid #05C3BC !important;
+}
+input:required {
+    border: 1px solid red; /* Красная рамка для обязательных полей */
+   }
 /* = Ссылки */
 a { text-decoration: none;}
 
@@ -508,7 +515,9 @@ textarea{
 	background: #495A9A;
 	border: 1px solid #2C4193;
 	padding: 7px;
+	vertical-align: 30px;
 	color: #fff;
+	padding: 7px;
 }
 
 #button:active{
@@ -599,4 +608,33 @@ img#call_bottom{
 }
 .close_bottom:hover {
     background-color: rgba(255, 69, 0, 0.8);
+}
+
+
+/*--------------------------------------------*/
+/*              ADMIN ---- PANEL              */ 
+/*--------------------------------------------*/
+
+/*----- USER -----*/
+
+.user_form_block{
+
+}
+.user_form_block form{
+	
+}
+.user_form_block form p{
+	text-align: left;
+}
+
+/*--------FORM__TABLE-------*/
+#form_teble{ width: 95%; margin: 20px auto;
+
+}
+#form_teble tr{ height: 40px;
+
+}
+#form_teble input[type='text'],
+#form_teble select{
+	width: 330px;
 }

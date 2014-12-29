@@ -29,7 +29,7 @@ class Display_lib
 	 	$CI->load->view($this->_tpl.'/blocks/header');
 	    $CI->load->view($this->_tpl.'/blocks/menu');
 	    $CI->load->view($this->_tpl.'/blocks/left', $data);
-	 	$CI->load->view($this->_tpl.'/'.$view, $data);
+	 	$CI->load->view($this->_tpl.'/admin/'.$view, $data);
 	    $CI->load->view($this->_tpl.'/blocks/footer');
 		
 	}

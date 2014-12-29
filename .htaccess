@@ -1,0 +1,21 @@
+
+AddDefaultCharset UTF-8
+
+#RewriteCond  %{REMOTE_ADDR} !127.0.0.1
+#RewriteCond %{REQUEST_FILENAME} !under/under.jpg
+#RewriteRule ^(.*)$ under/under.htm [L,QSA]
+
+php_flag display_errors on 
+
+
+<IfModule mod_rewrite.c>
+
+    Options +FollowSymLinks
+    RewriteEngine on
+
+    # Send request via index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L]
+
+</IfModule> 

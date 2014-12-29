@@ -41,6 +41,10 @@
 $route['default_controller'] = "vacansy";
 $route['404_override'] = '';
 
+
+
+$route['admin'] = "admin/vacansy";
+
 //$route['(.*)/admin/auth/index/(.*)']  = 'admin/auth/index/$1';
 //$route['(.*)'] = 'auth/index/$1';
 

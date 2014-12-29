@@ -26,7 +26,7 @@ class Vacansy extends Admin_Controller{
 		$this->load->model('city_model');
 		$this->data['city'] = $this->city_model->get();
 		//DEbug
-		//$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(TRUE);
 	}
 
 	public function index()
@@ -35,7 +35,7 @@ class Vacansy extends Admin_Controller{
 
 		$this->data['vacansy'] = $this->vacansy_model->get_vacansy();
 
-		$view = 'admin/vacansy_table';
+		$view = 'vacansy_table';
 	
 		$this->display_lib->view_admin_page($view, $this->data);
 	}
@@ -51,7 +51,7 @@ class Vacansy extends Admin_Controller{
 	{
 		$this->data['vacansy'] = $this->vacansy_model->get_vacansy($id_vac, NULL, TRUE);
 
-		$view = 'admin/card_vacansy';
+		$view = 'card_vacansy';
 		
 		$this->display_lib->view_admin_page($view, $this->data);
 	}
@@ -117,7 +117,7 @@ class Vacansy extends Admin_Controller{
 		$this->data['local'] = $this->localis_model->get();
 
 		// Load the view
-		$view = 'admin/edit_vacansy';
+		$view = 'edit_vacansy';
 		//$this->data['subview'] = 'admin/admin/vacansy/form_vacansy';
 		$this->display_lib->view_admin_page($view, $this->data);
 	}
@@ -222,7 +222,7 @@ class Vacansy extends Admin_Controller{
 		$this->load->model('localis_model');
 		$this->data['local'] = $this->localis_model->get();
 
-		$view = 'admin/form_vacansy';
+		$view = 'form_vacansy';
 		//$this->data['subview'] = 'admin/admin/vacansy/form_vacansy';
 		$this->display_lib->view_admin_page($view, $this->data);
 	}

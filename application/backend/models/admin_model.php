@@ -11,18 +11,41 @@ class Admin_Model extends MY_Model
     
     protected $_timestamps = TRUE;
 
-     public $rules = array(
+    public $rules = array(
         'login' => array(
             'field' => 'login',
             'label' => 'Login',
             'rules' => 'trim|required|xxs_clean'
         ),
+        
         'password' => array(
             'field' => 'password',
             'label' => 'Password',
             'rules' => 'trim|required'
         )
     );
+    public $reg_rules =array(
+        'email' => array(
+            'field' => 'email',
+            'label' => 'Email',
+            'rules' => 'trim|required|valid_email|is_unique[admins.email]|xss_clean'
+        ),
+        'group' => array(
+            'field' => 'group',
+            'label' => 'Группа пользователя',
+            'rules' => 'trim|required|is_natural_no_zero'
+        ),
+        'roles_name' => array(
+            'field' => 'roles_name',
+            'label' => 'Название роли',
+            'rules' => 'trim|required|xxs_clean'
+        ),
+        'roles' => array(
+            'field' => 'roles',
+            'label' => 'Код роли',
+            'rules' => 'trim|required|alpha_dash|xxs_clean'
+        ),
+        );
 
 	function __construct()
 	{
@@ -44,6 +67,7 @@ class Admin_Model extends MY_Model
 		        'login' => $user->login,
 		        'id_admin' => $user->id,
 		        'loggedin' =>TRUE,
+                'is_admin' => $user->is_admin,
 		    );
 
 		    $this->session->set_userdata($data);
@@ -53,14 +77,18 @@ class Admin_Model extends MY_Model
         return FALSE;
 	}
 
-    public function registration()
+    public function create_user($data)
     {
-        //проверить на уникальность emaila
         
-        // Если запись в БД успешна
-        
-        //посылаем письмо с активацией
+         $id = $this->save($data);
+         if($id)
+         {
+            return $id;
+         }
+         return FALSE;
     }
+
+    
 
 	public function confirmation()
 	{
@@ -82,7 +110,38 @@ class Admin_Model extends MY_Model
     {
         return (bool) $this->session->userdata('is_admin');
     }
+    /**
+     * Метод генирации пароля
+     * @return array 'password','md5', 'hash'
+     */
+    public function pass_generate()
+    {   
+        $this->load->helper('csm_helper');
 
+        $pass = array();
+        $pass = password_generate((int)7);
+
+        return (object)$pass;
+
+    }
+    public function confirm_registration($code)
+    {
+        $query = "SELECT activation_code  FROM ".$this->_table_name." WHERE activation_code = ?";
+        $result = $this->db->query($query, $code);
+
+        if ($result->num_rows()==1) 
+        {
+            $query = "UPDATE  ".$this->_table_name."  SET  activation = 1 WHERE activation_code = ?";
+            $result= $this->db->query($query, $code);
+
+
+        return TRUE;
+
+        }
+
+       return false;
+     
+    }
 
     public function hash($string)
     {

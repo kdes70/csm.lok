@@ -13,7 +13,7 @@ function password_generate($n)
 
   $password="";
 
-  for($i = 1; $i < $n; $i++)
+  for($i = 1; $i <= $n; $i++)
       {
         $count=count($symbol);
         $index = rand(0,$count); 
@@ -24,7 +24,7 @@ function password_generate($n)
     $return['md5'] = md5($password);
     $return['hash'] = hash('sha512', $password. config_item('encryption_key'));
     
-    return $return;
+    return (object)$return;
 }
 
 function rus_date() {
