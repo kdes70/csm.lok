@@ -5,16 +5,19 @@ class Category extends Admin_Controller{
 	public function __construct()
 	{
 		parent::__construct();
-$this->load->helper('csm_helper');
+		
+		$this->load->helper('csm_helper');
+		
+
+		$this->load->model('resume_model');
+		$this->data['new_resume'] = $this->resume_model->get_count_by(array('read'=>'0', 'public'=>'1'));
+
+		$this->load->model('vacansy_model');
+
 		//Категории
 		$this->load->model('category_model');
 		$this->data['category'] = $this->category_model->get();
-
-		$this->load->model('resume_model');
-$this->data['new_resume'] = $this->resume_model->get_count_by(array('read'=>'0', 'public'=>'1'));
-
-
-		$this->load->model('vacansy_model');
+		
 		foreach ($this->data['category'] as $key =>$value) 
 		{
 
@@ -30,7 +33,7 @@ $this->data['new_resume'] = $this->resume_model->get_count_by(array('read'=>'0',
 	public function index()
 	{
 		
-		$view = 'admin/category';
+		$view = 'category';
 		//$this->data['subview'] = 'admin/admin/vacansy/vacansy_read';
 		$this->display_lib->view_admin_page($view, $this->data);
 
@@ -61,7 +64,7 @@ $this->data['new_resume'] = $this->resume_model->get_count_by(array('read'=>'0',
 			redirect('admin/category/edit');
 		}
 		//dump($this->data);
-		$view = 'admin/category';
+		$view = 'category';
 		//$this->data['subview'] = 'admin/admin/vacansy/vacansy_read';
 		$this->display_lib->view_admin_page($view, $this->data);
 

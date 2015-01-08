@@ -1,5 +1,17 @@
 
 <aside id="left_block">
+    <?php if($this->session->userdata('loggedin') == FALSE): ?>
+    <div class="title_left">Обучение</div>
+    <div class="left_content">
+         <div class="left_section" style="font-size: 14px">
+        <h3>Обучение</h3>
+      
+            <p><?php echo anchor('testing', 'Система тестирования'); ?></p>
+   
+       
+    </div>
+    </div><!-- left_content - Обучение -->
+     <?php endif; ?>
     <div class="title_left">Вакансии</div>
     <div class="left_content">
     <?php if($this->session->userdata('loggedin') == TRUE): ?>
@@ -8,7 +20,7 @@
                 <h3>Админ-панель</h3>
                 <p><?php echo anchor('admin/user', 'Администраторы'); ?></p>
                 <p><?php echo anchor('admin/page/meta', 'Мета-данные'); ?></p>
-                 <p><?php echo anchor('admin/testing', 'Система тестирования'); ?></p>
+                <p><?php echo anchor('admin/testing', 'Система тестирования'); ?></p>
               </div>
         <?php endif; ?>
         <div class="left_section">
@@ -36,6 +48,7 @@
         <?php endforeach; endif; ?>
     
     </div> -->
+   
     <div class="left_section" style="font-size: 14px">
         <h3>Категории</h3>
         <?php if($category): foreach($category as $item):?>

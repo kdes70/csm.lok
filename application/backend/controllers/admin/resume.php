@@ -35,7 +35,7 @@ class Resume extends Admin_Controller{
 
 	public function callback()
 	{
-		$view = 'admin/main_page';
+		$view = 'main_page';
 		$this->display_lib->view_admin_page($view, $this->data);
 	}
 
@@ -50,7 +50,7 @@ class Resume extends Admin_Controller{
 		$this->data['resume_archive_count'] = $this->resume_model->get_count_by(array('public'=>'0'));
 		$this->data['resum_active_count'] = $this->resume_model->get_count_by(array('public'=>'1'));
 
-		$view = 'admin/resume_table';
+		$view = 'resume_table';
 		$this->display_lib->view_admin_page($view, $this->data);
 	}
 
@@ -68,7 +68,7 @@ class Resume extends Admin_Controller{
 		//if()
 		$this->data['vacansy'] = $this->vacansy_model->get_by(array('id_vac'=>$this->data['resume']->id_vac), TRUE);
 
-		$view = 'admin/resume_full';
+		$view = 'resume_full';
 		$this->display_lib->view_admin_page($view, $this->data);
 	}
 
@@ -86,7 +86,7 @@ class Resume extends Admin_Controller{
 		//if()
 		$this->data['vacansy'] = $this->vacansy_model->get_by(array('id_vac'=>$this->data['resume']->id_vac), TRUE);
 
-		$view = 'admin/resume_full';
+		$view = 'resume_full';
 		$this->display_lib->view_admin_page($view, $this->data);
 	}
 
@@ -100,7 +100,7 @@ class Resume extends Admin_Controller{
 
 		$this->data['resume'] = $this->resume_model->get_by(array('public'=>'1', 'read'=>'0'));
 
-		$view = 'admin/resume_table';
+		$view = 'resume_table';
 		$this->display_lib->view_admin_page($view, $this->data);
 	}
 	public function archive()
@@ -112,7 +112,7 @@ class Resume extends Admin_Controller{
 
 		$this->data['resume'] = $this->resume_model->get_by(array('public'=>'0'));
 
-		$view = 'admin/resume_table';
+		$view = 'resume_table';
 		$this->display_lib->view_admin_page($view, $this->data);
 	}
 

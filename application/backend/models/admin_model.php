@@ -89,12 +89,6 @@ class Admin_Model extends MY_Model
     }
 
     
-
-	public function confirmation()
-	{
-		
-	}
-
 	 public function logout()
     { 
         $this->session->sess_destroy();
@@ -110,20 +104,7 @@ class Admin_Model extends MY_Model
     {
         return (bool) $this->session->userdata('is_admin');
     }
-    /**
-     * Метод генирации пароля
-     * @return array 'password','md5', 'hash'
-     */
-    public function pass_generate()
-    {   
-        $this->load->helper('csm_helper');
-
-        $pass = array();
-        $pass = password_generate((int)7);
-
-        return (object)$pass;
-
-    }
+    
     public function confirm_registration($code)
     {
         $query = "SELECT activation_code  FROM ".$this->_table_name." WHERE activation_code = ?";
@@ -153,28 +134,12 @@ class Admin_Model extends MY_Model
 
 // delete user
 
-
     public function is_admin($is_admin)
     {
         return (bool) $is_admin == 1;
     }
 
-    public function get_profiles($id_user)
-    {   
-        
-
-        $data = $this->get($id_user);
-        
-        if($data->profession)
-        {
-             $data->profession = $this->get_profession($data->profession);
-        }
-        // TODO продумать исключение  
-        $data->profession = (object)array('name'=>'Нет профессии');
-        return $data;
-
-    }
-
+  
 
 
 

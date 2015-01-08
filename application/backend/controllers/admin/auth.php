@@ -49,7 +49,7 @@ class Auth extends Admin_Controller{
 		$this->data['user_profile'] = $this->user_model->get($id_user);
 
 		//Основной слой вида 
-		$view = 'admin/_layout_show';
+		$view = '_layout_show';
 		//Вид формы входа в админ панель
 		$this->data['subview'] = 'admin/admin/user/user_profile';
 		$this->display_lib->dashboard($view, $this->data);

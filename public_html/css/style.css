@@ -2,7 +2,7 @@
 * { margin: 0; padding: 0 }
 
 /* = Убираем маркировку списков */
-ul, ol { list-style: none }
+ul, ol { list-style: none; }
 
 /* = Работаем с таблицами: убираем удвоение рамок ячеек и расстояние между ячейками */
 table { border-collapse: collapse; border-spacing: 0 }
@@ -173,8 +173,9 @@ div#menu_block {
 .left_content{
 	border: 1px solid #DDDBDB;
 	width: 100%;
-	min-height: 300px;
+	min-height: 150px;
 	padding: 10px;
+	margin-bottom: 20px;
 }
 .left_section{
 	margin-bottom: 20px;
@@ -512,14 +513,19 @@ textarea{
 	color: #333;
 }
 #button {
-	background: #495A9A;
+	background: #495A9A linear-gradient(#263286, #495A9A);
 	border: 1px solid #2C4193;
+	border-radius: 5px;
 	padding: 7px;
 	vertical-align: 30px;
 	color: #fff;
 	padding: 7px;
+	transition: all .3s;
 }
-
+#button:hover{
+	background: #495A9A linear-gradient(#495A9A, #263286);
+	box-shadow: 0 0 2px #aaa;
+}
 #button:active{
 	background: #1E3794;
 }
@@ -610,7 +616,100 @@ img#call_bottom{
     background-color: rgba(255, 69, 0, 0.8);
 }
 
+/*------------------TESTING--------------------*/
+#testing_block{
+	width: 90%;
+	margin: auto;
+	border-radius: 10px;
+	background: #ccc;
+	padding: 10px;
+}
+#testing_block > ul > li{
+	float: left;
+	width: 48%;
+	background: #E5E5E5;
+	margin: 5px;
+	text-align: left;
+	padding: 10px;
+	
+}
+#testing_block > ul > li > a{
+	font-weight: 600;
+}
+li > ul{
+	margin-left: 30px;
+}
+.child{
+	/*display: none;*/
+}
+.question{
+	display: none;
+}
 
+p.quest {
+	padding-bottom: 17px;
+	border-bottom: 1px solid #969696;
+}
+/*--pagin-tabs--*/
+.tabs{
+	margin: 20px;
+	text-align: center;
+}
+.tabs a{
+	border: 1px solid #ddd;
+	border-radius: 50%;
+	padding: 6px 12px;
+	text-decoration: none !important;
+	background: #fff;
+	color: #495A9A;
+	margin: 0 5px 0 0;
+}
+.tabs a:hover{
+	background: #eee;
+	text-decoration: none !important;
+}
+.tabs > a.tab-active{
+	background: #495A9A;
+	color: #fff;
+	border-color: #fff;
+	text-decoration: none !important;
+	cursor: default;
+}
+
+/*  ========== RESULT =========*/
+
+.count-res {
+	border: 1px solid #776F6F;
+	border-radius: 10px;
+	padding: 10px;
+	margin: 20px;
+	background: #fff;
+}
+	.question-res {
+	margin: 10px;
+	padding: 10px;
+	border: 1px dotted #888383;
+}
+.q{
+	font-weight: 600;
+}
+.ok{
+	background: #A4F9A8;
+	color: #302D2D;
+}
+
+.error{
+	background: #F5ABAB;
+	color: #302D2D;
+}
+.ok2{
+	color: #1C7312;
+	background: #73C777;
+}
+.error2{
+	color: #DA0A0A;
+	background: rgb(247, 86, 86);
+}
 /*--------------------------------------------*/
 /*              ADMIN ---- PANEL              */ 
 /*--------------------------------------------*/

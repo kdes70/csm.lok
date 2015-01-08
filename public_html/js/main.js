@@ -36,8 +36,66 @@ jQuery(document).ready(function($) {
 		console.log(info_row);
 	});
 	
+	// =================== TESTING ====================== //
+//TABS
+	$(function(){
+		$('#test_data').find('div:first').show();
+		$('.tabs a').on('click', function(event) {
+			event.preventDefault();
+			/* Act on the event */
+			if($(this).attr('class') == 'tab-active') return false;
+
+			var link = $(this).attr('href'); //Ссылка на выбраную вкладку
+			var prevActive = $('.tabs > a.tab-active').attr('href');// Активная ссылка
+			
+			$('.tabs > a.tab-active').removeClass('tab-active'); //Удаляем класс активной ссылки
+			$(this).addClass('tab-active'); // Добовляем активный класс той по которой кликнули
+
+			//Скрываем/Показываем вопросы
+			$(prevActive).fadeOut(100, function() {
+				$(link).fadeIn(100);
+			});
+
+			console.log($(this).attr('href'));
+		});
+//BUTTON
+	$('.btn').click(function() {
+		var test = +$('#test_id').text();
+		var res = { 'test':test };
+
+		$('.question').each(function() {
+			var id = $(this).data('id');
+			res[id] = $('input[name=question-'+id+']:checked').val();
+			
+		});
+		$.ajax({
+			url: 'testing',
+			type: 'POST',
+			// dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+			data: res,
+		})
+		.done(function(html) {
+			console.log("success");
+			$('#answ_result').html(html);
+
+		})
+		.fail(function() {
+			console.log("error");
+			alert('Error!');
+		})
+		.always(function() {
+			console.log("complete");
+		});
+		
+		
+	});
+
+	});
 
 
+
+
+	// =================== TESTING END ====================== //
 /*
 
 	$('a#go').click( function(event){ // ловим клик по ссылки с id="go"
@@ -114,8 +172,5 @@ function selectProfession (groups) {
 		profession.attr("disabled", false);
 	}
 
-
-
-
-
+	
 }
