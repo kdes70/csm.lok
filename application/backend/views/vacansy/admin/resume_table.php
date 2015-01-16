@@ -29,10 +29,10 @@
                 <tr>
                     <td><?php echo $item->id; ?></td>
   <?php if($this->uri->segment(3) === 'archive'): ?>
-    <td class="row_title"><?php echo anchor('admin/resume/full_arhive/'.$item->id, $item->surname.' '.$item->surname.' '.$item->patronymic); ?></td>
+    <td class="row_title"><?php echo anchor('admin/resume/full_arhive/'.$item->id, $item->surname.' '.$item->name.' '.$item->patronymic); ?></td>
                     
   <?php else: ?>
-    <td class="row_title"><?php echo anchor('admin/resume/full/'.$item->id, $item->surname.' '.$item->surname.' '.$item->patronymic); ?></td>
+    <td class="row_title"><?php echo anchor('admin/resume/full/'.$item->id, $item->surname.' '.$item->name.' '.$item->patronymic); ?></td>
                     
   <?php endif; ?>
                    <td><?php echo $item->email; ?></td>

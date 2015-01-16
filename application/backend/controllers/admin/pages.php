@@ -33,12 +33,19 @@ class Pages extends Admin_Controller{
 
 	public function index()
 	{	
+		$this->data['pages'] = $this->page_model->get();
 
-		$this->data['page'] = $this->page_model->get_by(array('url' => 'vacansy'), TRUE);
-		
-		$view = 'main_page';
+		$view = 'page/all_page';
 		$this->display_lib->view_admin_page($view, $this->data);
 
+	}
+
+	public function read($page)
+	{
+		$this->data['page'] = $this->page_model->get_by(array('url' => $page), TRUE);
+		
+		$view = 'page/main_page';
+		$this->display_lib->view_admin_page($view, $this->data);
 	}
 
 	public function edit_pages($page)
@@ -49,18 +56,19 @@ class Pages extends Admin_Controller{
 		$this->form_validation->set_rules($rules);
 		
 		// Process the form
-		if ($this->form_validation->run() == TRUE) {
+		if ($this->form_validation->run() == TRUE) 
+		{
 			$data = $this->page_model->array_from_post(array(
-				'text', 
-				
+				'text', 		
 			));
+
 			$this->page_model->save($data, $page);
 			redirect('admin/pages');
 		}
 		
 
 
-		$view = 'form_page';
+		$view = 'page/form_page';
 		$this->display_lib->view_admin_page($view, $this->data);
 
 	}

@@ -12,14 +12,19 @@ class Testing_Model extends CI_Model
 
     private $_arr_data = array();
 
+  
+
+
 /**
  * Получение списка тестов
  * @return object 
  */
-   protected function _get_tests() 
-   {
-        return $this->db->where("public = '1'")->get($this->_table_name_test)->result();
+   protected function _get_tests($public = FALSE) 
+   {    
+        $public = $public === TRUE? '0':'1';
+        return $this->db->where('public', $public)->get($this->_table_name_test)->result();
    }
+
 
 
 /**
@@ -29,8 +34,9 @@ class Testing_Model extends CI_Model
  */
    public function tree_array()
    {    //Получаем массив данных _get_tests() 
-        $this->_arr_data['test'] = $this->_get_tests();
-
+        
+             $this->_arr_data['test'] = $this->_get_tests();
+      
         if($this->_arr_data['test'])
         {
             $tree = array();
@@ -54,21 +60,30 @@ class Testing_Model extends CI_Model
     public function create_tree($cats, $parent_id, $is_admin = FALSE)
     {   
         if(is_array($cats) and isset($cats[$parent_id]))
-        {   //Если есть админ то меняем адрес
-            $url = $is_admin === TRUE? 'admin/testing/edit/':'testing/read/';
-
+        {  
+           // var_dump($cats);
             $tree = '<ul>';
             foreach($cats[$parent_id] as $cat)
             {   
+                 //Если есть админ то меняем адрес
+                $url = $is_admin == TRUE?'admin/testing/edit/':'testing/read/';
+                //И добовляем иконки статуса 
+                if($is_admin){
+                //Иконки ON/OFF
+                $view = $cat->public == '1'?
+                '<img src="'.base_url('images/on_icon.png').'" width="50px" alt="ok" title="Готовый тест">':
+                '<img src="'.base_url('images/off_icon.png').'" width="50px" alt="ok" title="Тест не готов">';
+                }else{ $view = '';} 
+              
                 if($cat->parent_id == 0)
                 {
-                    $tree .= "<li class='parent'><a href='".base_url($url.$cat->id)."'>".$cat->test_name."</a>";
+                    $tree .= "<li class='parent'><a href='".base_url($url.$cat->id)."'>".$cat->test_name. ' ' . $view ."</a>";
                 }
                 else{
-                    $tree .= "<li class='child'><a href='".base_url($url.$cat->id)."'>".$cat->test_name."</a>";
+                    $tree .= "<li class='child'><a href='".base_url($url.$cat->id)."'>".$cat->test_name. ' ' . $view ."</a>";
                 }
                 
-                $tree .= $this->create_tree($cats, $cat->id);
+                $tree .= $this->create_tree($cats, $cat->id, $is_admin);
                 $tree .= '</li>';
             }
 
@@ -83,16 +98,21 @@ class Testing_Model extends CI_Model
  * @param  [type] $test_id [description]
  * @return [type]          [description]
  */
-    public function get_test_data($test_id)
+    public function get_test_data($test_id, $is_admin = FALSE)
     {
         if(!$test_id) return FALSE;
+        //Если админ то показываем все 
+        if($is_admin == TRUE)
+        {
+            $this->db->where('t.public','1');
+        }
 
        return $this->db->select('q.question, q.parent_test, a.id, a.answer, a.parent_question')
                         ->from($this->_table_name_quest.' q')
                         ->join($this->_table_name_answ. ' a', 'q.id = a.parent_question', 'left')
                         ->join($this->_table_name_test.' t','t.id = q.parent_test', 'left')
                         ->where('q.parent_test', $test_id)
-                        ->where('t.public', '1')
+                        
                         ->get()->result();
     }
 /**
@@ -261,6 +281,12 @@ class Testing_Model extends CI_Model
     $correct_answer_count = $all_count - $incorrect_answer_count;
     $percent = round( ($correct_answer_count / $all_count * 100), 2);
 
+    if($percent < 50 ) return '<div class="questions">
+                                    <div class="count-res">
+                                    <p>Вы набрали мение 50%, попробуйте пройти тест заного</p>
+                                    </div>
+                                </div>';
+
     // вывод результатов
     $print_res = '<div class="questions">';
         $print_res .= '<div class="count-res">';
@@ -307,4 +333,7 @@ class Testing_Model extends CI_Model
     return $print_res;
 }
 
+   
+
+   
 }

@@ -173,7 +173,7 @@ div#menu_block {
 .left_content{
 	border: 1px solid #DDDBDB;
 	width: 100%;
-	min-height: 150px;
+	min-height: 80px;
 	padding: 10px;
 	margin-bottom: 20px;
 }
@@ -675,7 +675,43 @@ p.quest {
 	text-decoration: none !important;
 	cursor: default;
 }
-
+/*ДОБАВЛЕНИЕ ВОПРОС ОТВЕТ*/
+.option_chaild{
+	background: #ccc;
+}
+.select_cat{
+	overflow:  hidden;
+	padding: 5px;
+	width: 300px;
+}
+.select_cat option{
+	padding: 5px;
+}
+.removeclass{
+	background-image: url('../images/document_delete.png') ;
+	background-size: 30px;
+	height: 30px;
+	display: inline-block;
+	width: 30px;
+	position: absolute;
+	margin-left: 10px;
+}
+.fild_qest input[name=test_qest]{
+	width: 600px;
+}
+#Wrapper input[type=text]{
+	width: 480px;
+}
+#Wrapper input[type=checkbox]{
+	width: 20px;
+	margin-left: 5px;
+}
+#Wrapper label{
+	margin: 5px;
+}
+.butt_save{
+	display: none;
+}
 /*  ========== RESULT =========*/
 
 .count-res {

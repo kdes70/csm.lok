@@ -16,7 +16,7 @@
       <?php endif; ?>
     <div id="author_block">
         <h4>Контактные данные</h4>
-        <p>ФИО: <?php echo $resume->surname .' '. $resume->name .' '. $resume->surname;  ?></p>
+        <p>ФИО: <?php echo $resume->surname .' '. $resume->name .' '. $resume->patronymic;  ?></p>
         <p>Дата рождения: <?php echo rus_date("j F Y", strtotime($resume->birthday)); ?></p>
         <p>Email: <?php echo mailto($resume->email); ?></p>
         <p>Телефон: <?php echo $resume->phone; ?></p>

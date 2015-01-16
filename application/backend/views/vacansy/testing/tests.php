@@ -10,7 +10,7 @@
     </article>
     <div id="testing_block">
       <?php if($tests): ?>
-        <h3>Выбирете тему тестов</h3>
+        <h3>Выберите тему тестов</h3>
         <hr>
         <?php echo $tests; ?>
       <?php else: ?>

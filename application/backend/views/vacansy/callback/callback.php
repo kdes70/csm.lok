@@ -4,11 +4,12 @@
       <div id="reg_form_error" class="alert alert-error"><!-- dinamik-->
        <?php echo validation_errors(); ?>
        </div>
-	<p>
-	 	<label for="fio">ФИО<span class="red">*</span><br>
-        <?php echo form_input('fio', set_value('fio'), 'id="fio" maxlength="100"'); ?>
-    </label>
-	</p>
+	 <p>
+    <label for="fio">Контактное лицо(ФИО)<span class="red">*</span></label><br>
+    <?php echo form_input('surname', set_value('surname'), 'placeholder="Фамилия" id="surname" maxlength="100"'); ?>
+    <?php echo form_input('name', set_value('name'), 'placeholder="Имя" id="name" maxlength="100"'); ?>
+    <?php echo form_input('patronymic', set_value('patronymic'), 'placeholder="Отчество" id="patronymic" maxlength="100"'); ?>
+    </p>
 	<p>
 		 <label for="email">Email<span class="red">*</span><br>
         <?php echo form_input('email', set_value('email'), 'id="email" maxlength="100"'); ?>

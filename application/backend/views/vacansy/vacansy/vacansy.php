@@ -4,7 +4,7 @@
     <h3>Страница <?php echo $page->title; ?></h3>
   <!--   <span style="color: red">На данном этапе страница находится в разработке, приносим извинения за не удобства</span> -->
     <article>
-    <img src="<?php echo base_url('images/new-y.jpg'); ?>" alt="С новым годом!">
+
      <?php echo $page->text; ?>
 		
     </article>

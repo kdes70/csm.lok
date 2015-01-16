@@ -96,6 +96,47 @@ jQuery(document).ready(function($) {
 
 
 	// =================== TESTING END ====================== //
+	
+
+	//ДОБАВЛЕНИЕ ПОЛЕЙ
+var MaxInputs       = 5; //максимальное количство для добавления
+var Wrap   = $("#Wrapper"); //родительский элемент полей
+var AddButton       = $("#INeedMore"); //Кнопка добавить поле
+var x = Wrap.length; //подсчет количества полей
+var FieldCount=0; //добавляем каждому полю + 1
+
+$(AddButton).click(function (e)  //функция добавления нового поля
+{	//Если есть поля показаваем кнопку сохранения
+	$('.butt_save').show();
+
+        if(x <= MaxInputs) //проверяем на максимальное кол-во
+        {
+            FieldCount++; 
+            //добавляем поле
+            $(Wrap).append('<p><label for="answ_'+ FieldCount +'">Правильный ответ-'+ FieldCount +'<input type="checkbox" name="correct_answer" id="answ_'+ FieldCount +'" value="'+ FieldCount +'"></label><input type="text" name="answer[]" id="answer_'+ FieldCount +'" value=""/><a href="#" class="removeclass"></a></p>');
+            x++; //приращение текстового поля
+        }
+        
+return false;
+});
+$("body").on("click",".removeclass", function(e){ //удаление поля
+        if( x > 1 ) {
+                $(this).parent('p').remove(); //удалить блок с полем
+                x--; //уменьшаем номер текстового поля
+        //если блоков меньше 1 убираем кнопку сохранить
+        if(x <= 1){
+     		$('.butt_save').hide();
+        }
+
+        }
+
+ 
+return false;
+}); 
+
+
+
+
 /*
 
 	$('a#go').click( function(event){ // ловим клик по ссылки с id="go"

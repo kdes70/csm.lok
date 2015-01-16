@@ -46,7 +46,7 @@ class Callback extends Frontend_Controller{
 
 		if($this->form_validation->run() == TRUE)
 		{
-			$fio = $this->input->post('fio');
+			$fio =  $this->input->post('surname') . ' ' . $this->input->post('name') .' '. $this->input->post('patronymic');
 			$email = $this->input->post('email');
 			$phone = $this->input->post('phone');
 			$comm = $this->input->post('comment');
@@ -68,8 +68,9 @@ class Callback extends Frontend_Controller{
 			$this->load->library('email');
 			$this->email->from('hr@0370.ru', 'HR-Manager');
 			$this->email->to(array('krdv@0370.ru', 'hr@0370.ru', set_value('email')));
-			$this->email->subject('заявка на обратный звонок '.set_value('fio'));
-			$this->email->message('Получина заявка на обратный звонок Телефон для звонка: '.$phone. ' Примечание: '.$comm);
+			$this->email->subject('заявка на обратный звонок от '.$fio);
+			$this->email->message('<p>Получина заявка на обратный звонок от '.$fio.'</p> 
+				<p>Телефон для звонка: '.$phone. '</p> <p>Примечание: '.$comm.'</p>');
 			// $this->email->message($this->load->view('vacansy/email/callback_to'), $data);
 			
 			 						

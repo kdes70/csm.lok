@@ -150,3 +150,15 @@ function numberFormat($digit, $width) {
     { 
        return ($id == $return) ? 'checked="checked"' : NULL; 
     }        
+
+/**   
+* Возврат селектов 
+* @param $id integr
+* @param $return integr
+* @return string
+*/ 
+    function returnSelect($id, $return) 
+    { 
+       return ($id == $return) ? 'selected="selected"' : NULL; 
+    }      
+    

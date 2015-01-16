@@ -1,5 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+
+
 function __autoload($classname) {
 	if (strpos($classname, 'CI_') !== 0) {
 		$file = APPPATH . 'libraries/' . $classname . '.php';

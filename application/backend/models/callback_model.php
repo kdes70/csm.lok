@@ -11,11 +11,21 @@ class Callback_Model extends MY_Model
 
     public $rules = array(
 		
-		'fio' => array(
-			'field' => 'fio', 
-			'label' => 'ФИО', 
-			'rules' => 'trim|required|xxs_clean'
-		),
+		 'surname' => array(
+            'field' => 'surname',
+            'label' => 'Фамилия',
+            'rules' => 'trim|required|xxs_clean'
+        ),
+        'name' => array(
+            'field' => 'name',
+            'label' => 'Имя',
+            'rules' => 'trim|required|xxs_clean'
+        ),
+        'patronymic' => array(
+            'field' => 'patronymic',
+            'label' => 'Отчество',
+            'rules' => 'trim|required|xxs_clean'
+        ),
 		'email' => array(
             'field' => 'email',
             'label' => 'Email',

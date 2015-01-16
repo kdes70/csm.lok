@@ -1,14 +1,35 @@
 
 <aside id="left_block">
+     <div class="title_left">Авторизация</div>
+    <div class="left_content">
+         <div class="left_section" style="font-size: 14px">
+        <?php echo form_open('user/auth'); ?>
+      
+    <p>
+        <label for="login">Login <br>
+        <?php echo form_input('login', set_value('login'), 'id="login" maxlength="30"'); ?>
+        </label>
+    </p>
+    <p>
+        <label for="pass">Password <br>
+        <?php echo form_password('password', '', 'id="pass" maxlength="30"'); ?>
+        </label>
+    </p>
+    <p>
+        <?php echo form_submit('submit', 'Вход', 'id="button"'); ?>
+    </p>
+            <p><?php echo anchor('user/registration', 'Регистрация'); ?></p>
+   
+        <?php echo form_close(); ?>
+    </div>
+    </div><!-- left_content - Авторизация -->
+
     <?php if($this->session->userdata('loggedin') == FALSE): ?>
     <div class="title_left">Обучение</div>
     <div class="left_content">
          <div class="left_section" style="font-size: 14px">
-        <h3>Обучение</h3>
       
             <p><?php echo anchor('testing', 'Система тестирования'); ?></p>
-   
-       
     </div>
     </div><!-- left_content - Обучение -->
      <?php endif; ?>
