@@ -1,37 +1,13 @@
 
 <aside id="left_block">
-     <div class="title_left">Авторизация</div>
-    <div class="left_content">
-         <div class="left_section" style="font-size: 14px">
-        <?php echo form_open('user/auth'); ?>
-      
-    <p>
-        <label for="login">Login <br>
-        <?php echo form_input('login', set_value('login'), 'id="login" maxlength="30"'); ?>
-        </label>
-    </p>
-    <p>
-        <label for="pass">Password <br>
-        <?php echo form_password('password', '', 'id="pass" maxlength="30"'); ?>
-        </label>
-    </p>
-    <p>
-        <?php echo form_submit('submit', 'Вход', 'id="button"'); ?>
-    </p>
-            <p><?php echo anchor('user/registration', 'Регистрация'); ?></p>
-   
-        <?php echo form_close(); ?>
-    </div>
-    </div><!-- left_content - Авторизация -->
-
     <?php if($this->session->userdata('loggedin') == FALSE): ?>
-    <div class="title_left">Обучение</div>
+   <!--  <div class="title_left">Обучение</div>
     <div class="left_content">
          <div class="left_section" style="font-size: 14px">
       
             <p><?php echo anchor('testing', 'Система тестирования'); ?></p>
     </div>
-    </div><!-- left_content - Обучение -->
+    </div> --><!-- left_content - Обучение -->
      <?php endif; ?>
     <div class="title_left">Вакансии</div>
     <div class="left_content">
@@ -70,12 +46,13 @@
     
     </div> -->
    
-    <div class="left_section" style="font-size: 14px">
-        <h3>Категории</h3>
-        <?php if($category): foreach($category as $item):?>
-            <p><?php echo anchor('vacansy/cat/'.$item->id, $item->name.'('.$item->count.')'); ?></p>
-        <?php endforeach; endif; ?>
-       
+        <div class="left_section" style="font-size: 14px">
+            <h3>Категории</h3>
+            <?php if($category): foreach($category as $item):?>
+                <p><?php echo anchor('vacansy/cat/'.$item->id, $item->name.'('.$item->count.')'); ?></p>
+            <?php endforeach; endif; ?>
+           
+        </div>
     </div>
-    </div>
+
 </aside>

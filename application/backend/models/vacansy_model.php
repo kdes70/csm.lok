@@ -5,7 +5,7 @@ class Vacansy_Model extends MY_Model
     protected $_table_name = 'vacansy';
     protected $_primary_key = 'id_vac';
     protected $_primary_filter = 'intval';
-    protected $_order_by = 'id_vac DESC';
+    protected $_order_by = 'modified DESC';
     protected $_timestamps = TRUE;
 
  	public $rules = array(

@@ -20,7 +20,7 @@
                 <a><h3><?php echo $item->title; ?></h3></a>
                 <p><?php echo $item->cat ?></p>
                 <!-- <p class="price"><?php echo $item->wage_rate;?><br><?php echo $item->wage_structure;?></p> -->
-                <p class="date_create">Дата размещения: <?php echo rus_date("j F", strtotime($item->created)); ?></p>
+                <p class="date_create">Дата размещения: <?php echo rus_date("j F", strtotime($item->modified)); ?></p>
                 <div class="vacansy_info" id="info_block_<?php echo $item->id_vac;?>">
                     <h4>Место работы:</h4>
                         <p><span>Город:</span> <?php echo $item->cityname;?></p>

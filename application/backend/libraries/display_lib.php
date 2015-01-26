@@ -22,6 +22,20 @@ class Display_lib
 		
 	}
 
+	public function view_page_reg($view, $data = array())
+	{	
+		
+
+		$CI =& get_instance();
+
+	 	$CI->load->view($this->_tpl.'/blocks/header');
+	    $CI->load->view($this->_tpl.'/blocks/menu');
+	   // $CI->load->view($this->_tpl.'/blocks/left', $data);
+	 	$CI->load->view($this->_tpl.'/'.$view, $data);
+	    $CI->load->view($this->_tpl.'/blocks/footer');
+		
+	}
+
 	public function view_admin_page($view, $data = array())
 	{
 		$CI =& get_instance();
@@ -44,6 +58,7 @@ class Display_lib
 	    $CI->load->view($this->_tpl.'/blocks/footer');
 		
 	}
+
     
     /**
      * Функция вида для верстки

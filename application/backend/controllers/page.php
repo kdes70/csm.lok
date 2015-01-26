@@ -61,8 +61,9 @@ class Page extends Frontend_Controller{
 
 			
 			case 'info':
-				//Подключаем виды для страницы информации
-				$this->data['subview'] = 'page/post_row';
+				$this->load->model('post_model');
+				$this->data['post'] = $this->post_model->get_by(array('page_id'=>10, 'public'=>'1'));
+				
 				$this->display_lib->view_page('page/info', $this->data);
 				break;
 			case 'registration':

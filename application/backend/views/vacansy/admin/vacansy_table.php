@@ -36,7 +36,7 @@
                     <td><?php echo $item->cityname; ?></td>
                     <td class="row_cat"><?php echo $item->cat; ?></td>
                     <td class="row_author"><?php echo $item->author; ?></td>
-                    <td class="row_data"><?php echo rus_date("j F - H:i", strtotime($item->created)); ?></td>
+                    <td class="row_data"><?php echo rus_date("j F - H:i", strtotime($item->modified)); ?></td>
                     <td class="row_option">
                         
                     <a href="<?php echo base_url('admin/vacansy/edit/'.$item->id_vac); ?>"><img src="<?php echo base_url('images/file_edit.png'); ?>" width="32px" alt="Редактировать"></a>

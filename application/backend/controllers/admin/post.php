@@ -1,12 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Pages extends Admin_Controller{
+class Post extends Admin_Controller{
 
 	public function __construct()
 	{
 		parent::__construct();
 
 		$this->load->model('page_model');
+
+		$this->load->model('post_model');
 
 		$this->load->model('vacansy_model');
 		$this->load->helper('csm_helper');
@@ -40,6 +42,45 @@ class Pages extends Admin_Controller{
 
 	}
 
+	public function add_post()
+	{
+
+		$rules = $this->post_model->rules;
+
+		$this->form_validation->set_rules($rules);
+		if($this->form_validation->run() == TRUE)
+		{
+			$title = $this->input->post('title');
+			$text = $this->input->post('text');
+
+			$data = array(
+				'title' => $title,
+				'text' => $text,
+				'page_id' => 10,
+				'public' => '1'
+				);
+
+			$id = $this->post_model->save($data);
+
+			if($id)
+			{
+				redirect('admin/pages/edit_pages/info', 'location');
+			}
+		}
+
+
+		$view = 'page/post_form';
+		$this->display_lib->view_admin_page($view, $this->data);
+	}
+
+
+		public function delete($id)
+	{
+		$this->post_model->delete($id);
+		redirect('admin/pages/edit_pages/info', 'location');
+	}
+
+
 	public function read($page)
 	{
 		$this->data['page'] = $this->page_model->get_by(array('url' => $page), TRUE);
@@ -65,9 +106,9 @@ class Pages extends Admin_Controller{
 			$this->page_model->save($data, $page);
 			redirect('admin/pages');
 		}
-		//Данные для таблици с постами
-		$this->load->model('post_model');
-		$this->data['post_row'] = $this->post_model->get_by(array('public' => '1', 'page_id'=>10));
+		
+
+
 
 
 		$view = 'page/form_page';
